@@ -1,6 +1,7 @@
 package com.toy.sakila.common;
 
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -18,5 +19,6 @@ import java.lang.annotation.Target;
         "spring.jpa.database-platform=org.hibernate.dialect.H2Dialect",
         "spring.jpa.properties.hibernate.format_sql=true"
 })
+@ActiveProfiles("test")
 public @interface DataJpaUnitTest {
 }
