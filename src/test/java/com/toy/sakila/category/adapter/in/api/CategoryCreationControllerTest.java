@@ -45,7 +45,5 @@ class CategoryCreationControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(command)))
                 .andExpect(status().isOk());
-
-        // that
     }
 }
