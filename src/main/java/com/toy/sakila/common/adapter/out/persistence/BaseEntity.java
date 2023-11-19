@@ -19,7 +19,7 @@ public abstract class BaseEntity {
 
     @PrePersist
     @PreUpdate
-    private void onUpdate() {
+    public void onUpdate() {
         lastUpdate = LocalDateTime.now();
     }
 }

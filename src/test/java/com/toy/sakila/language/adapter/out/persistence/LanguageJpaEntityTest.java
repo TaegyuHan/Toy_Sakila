@@ -24,7 +24,7 @@ class LanguageJpaEntityTest {
                 .build();
         category = entityManager.persistFlushFind(category);
 
-        // that
+        // then
         assertNotNull(category.getId());
         assertEquals("Test Language", category.getName());
     }

@@ -40,7 +40,7 @@ class LanguageCreationServiceTest {
                 .thenReturn(expected);
         Language.LanguageId result = categoryCreationService.create(command);
 
-        // that
+        // then
         assertEquals(expected, result);
         verify(categoryCreationPort).create(any(Language.class));
     }

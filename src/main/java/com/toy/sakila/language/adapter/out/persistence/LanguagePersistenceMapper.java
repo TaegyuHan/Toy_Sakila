@@ -11,4 +11,12 @@ public class LanguagePersistenceMapper {
                 .name(category.getName())
                 .build();
     }
+
+    public Language mapToDomainEntity(LanguageJpaEntity entity) {
+        return Language.builder()
+                .id(new Language.LanguageId(entity.getId()))
+                .name(entity.getName())
+                .lastUpdate(entity.getLastUpdate())
+                .build();
+    }
 }
