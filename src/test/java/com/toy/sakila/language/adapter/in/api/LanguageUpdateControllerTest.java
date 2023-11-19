@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.toy.sakila.language.application.port.in.LanguageUpdateCommand;
 import com.toy.sakila.language.application.port.in.LanguageUpdateUseCase;
 import com.toy.sakila.language.domain.Language;
+import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -63,7 +64,23 @@ class LanguageUpdateControllerTest {
         mockMvc.perform(post("/film/languages/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(command)))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(result -> {
+                    String actualJson = result.getResponse().getContentAsString();
+                    JSONObject actualJSON = new JSONObject(actualJson);
+                    JSONObject expectedJSON = new JSONObject("""
+                                {
+                                  "data": {
+                                    "lastUpdate": "2023-11-18T21:19:12",
+                                    "name": "Animation",
+                                    "id": 1
+                                  },
+                                  "message": "Language 수정을 완료했습니다.",
+                                  "status": 200
+                                }
+                            """);
+                    assertEquals(expectedJSON.toString(), actualJSON.toString());
+                });
 
         // then
         verify(languageUpdateUseCase, times(1))

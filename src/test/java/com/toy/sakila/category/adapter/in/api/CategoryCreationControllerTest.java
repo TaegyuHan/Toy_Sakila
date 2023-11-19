@@ -5,15 +5,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.toy.sakila.category.application.port.in.CategoryCreationCommand;
 import com.toy.sakila.category.application.port.in.CategoryCreationUseCase;
 import com.toy.sakila.category.domain.Category;
+import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -29,21 +36,46 @@ class CategoryCreationControllerTest {
     @MockBean
     private CategoryCreationUseCase categoryCreationUseCase;
 
+    @Captor
+    private ArgumentCaptor<CategoryCreationCommand> commandCaptor;
+
     @Test
     @DisplayName("성공 | REST API | POST | Category | 생성")
-    void categoryCreation() throws Exception {
+    void categoryCreationTest() throws Exception {
         // given
         CategoryCreationCommand command = CategoryCreationCommand.builder()
                 .name("Animation")
                 .build();
 
-        given(categoryCreationUseCase.create(command))
+        given(categoryCreationUseCase.create(any(CategoryCreationCommand.class)))
                 .willReturn(new Category.CategoryId(1L));
 
         // when
         mockMvc.perform(post("/film/category")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(command)))
-                .andExpect(status().isOk());
+                // then
+                .andExpect(status().isOk())
+                .andExpect(result -> {
+                    String actualJson = result.getResponse().getContentAsString();
+                    JSONObject actualJSON = new JSONObject(actualJson);
+                    JSONObject expectedJSON = new JSONObject("""
+                                {
+                                  "data": {
+                                    "id": 1
+                                  },
+                                  "message": "Category 생성을 완료했습니다.",
+                                  "status": 200
+                                }
+                            """);
+                    assertEquals(expectedJSON.toString(), actualJSON.toString());
+                });
+
+        // then
+        verify(categoryCreationUseCase, times(1))
+                .create(commandCaptor.capture());
+
+        CategoryCreationCommand commandArgument = commandCaptor.getValue();
+        assertEquals(command.getName(), commandArgument.getName());
     }
 }

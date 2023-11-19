@@ -18,7 +18,7 @@ class CategoryTest {
                 .lastUpdate(LocalDateTime.parse("2023-11-18T13:45:00"))
                 .build();
 
-        // that
+        // then
         assertEquals(1L, category.getId().getValue());
         assertEquals("Animation", category.getName());
         assertEquals(LocalDateTime.parse("2023-11-18T13:45:00"), category.getLastUpdate());

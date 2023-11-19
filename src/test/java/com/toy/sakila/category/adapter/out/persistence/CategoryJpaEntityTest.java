@@ -18,14 +18,16 @@ class CategoryJpaEntityTest {
 
     @Test
     @DisplayName("성공 | JPA Entity | Category | 생성")
-    public void testCategoryJpaEntityPersistence() {
-        // when
+    public void categoryJpaEntityPersistenceTest() {
+        // given
         CategoryJpaEntity category = CategoryJpaEntity.builder()
                 .name("Test Category")
                 .build();
+
+        // when
         category = entityManager.persistFlushFind(category);
 
-        // that
+        // then
         assertNotNull(category.getId());
         assertEquals("Test Category", category.getName());
     }

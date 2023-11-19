@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -36,12 +37,13 @@ class CategoryCreationServiceTest {
                 .build();
         Category.CategoryId expected = new Category.CategoryId(1L);
 
+        given(categoryCreationPort.create(any(Category.class)))
+                .willReturn(expected);
+
         // when
-        when(categoryCreationService.create(command))
-                .thenReturn(expected);
         Category.CategoryId result = categoryCreationService.create(command);
 
-        // that
+        // then
         assertEquals(expected, result);
         verify(categoryCreationPort).create(any(Category.class));
     }

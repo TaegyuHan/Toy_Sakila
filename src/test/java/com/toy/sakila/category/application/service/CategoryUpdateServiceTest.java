@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 
@@ -41,13 +42,13 @@ class CategoryUpdateServiceTest {
                 .name("Animation")
                 .build();
 
-        // when
-        when(categoryUpdateService.update(id, command))
-                .thenReturn(expected);
+        given(categoryUpdatePort.update(any(Category.class)))
+                .willReturn(expected);
 
+        // when
         Category result = categoryUpdateService.update(id, command);
 
-        // that
+        // then
         verify(categoryUpdatePort, times(1)).update(any(Category.class));
         assertEquals(expected, result);
     }
