@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.toy.sakila.actor.application.port.in.ActorUpdateCommand;
 import com.toy.sakila.actor.application.port.in.ActorUpdateUseCase;
 import com.toy.sakila.actor.domain.Actor;
-import com.toy.sakila.utils.JsonComparator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -17,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 
+import static com.toy.sakila.utils.JsonComparator.assertJsonEquals;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -83,7 +83,7 @@ class ActorUpdateControllerTest {
                                       "status": 200
                                     }
                             """;
-                    assertTrue(JsonComparator.compareJsonStrings(actualJson, expectedJson));
+                    assertJsonEquals(actualJson, expectedJson);
                 });
 
         // then

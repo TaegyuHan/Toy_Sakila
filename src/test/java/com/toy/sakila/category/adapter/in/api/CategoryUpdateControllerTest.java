@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 
+import static com.toy.sakila.utils.JsonComparator.assertJsonEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -69,8 +70,7 @@ class CategoryUpdateControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(result -> {
                     String actualJson = result.getResponse().getContentAsString();
-                    JSONObject actualJSON = new JSONObject(actualJson);
-                    JSONObject expectedJSON = new JSONObject("""
+                    String expectedJson = """
                                 {
                                   "data": {
                                     "lastUpdate": "2023-11-18T21:19:12",
@@ -80,8 +80,8 @@ class CategoryUpdateControllerTest {
                                   "message": "Category 수정을 완료했습니다.",
                                   "status": 200
                                 }
-                        """);
-                    assertEquals(expectedJSON.toString(), actualJSON.toString());
+                        """;
+                    assertJsonEquals(actualJson, expectedJson);
                 });
 
         // then

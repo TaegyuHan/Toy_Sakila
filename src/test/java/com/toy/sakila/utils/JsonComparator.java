@@ -3,6 +3,8 @@ package com.toy.sakila.utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class JsonComparator {
 
     /**
@@ -16,5 +18,11 @@ public class JsonComparator {
         JSONObject actualJSONObject = new JSONObject(actualJson);
         JSONObject expectedJSONObject = new JSONObject(expectedJsonString);
         return actualJSONObject.toString().equals(expectedJSONObject.toString());
+    }
+
+    public static void assertJsonEquals(String actualJson, String expectedJson) throws JSONException {
+        JSONObject actualJSONObject = new JSONObject(actualJson);
+        JSONObject expectedJSONObject = new JSONObject(expectedJson);
+        assertEquals(actualJSONObject.toString(), expectedJSONObject.toString());
     }
 }

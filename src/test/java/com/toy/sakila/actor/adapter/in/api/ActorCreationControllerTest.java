@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.toy.sakila.actor.application.port.in.ActorCreationCommand;
 import com.toy.sakila.actor.application.port.in.ActorCreationUseCase;
 import com.toy.sakila.actor.domain.Actor;
-import com.toy.sakila.utils.JsonComparator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -15,8 +14,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static com.toy.sakila.utils.JsonComparator.assertJsonEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
@@ -60,15 +59,15 @@ class ActorCreationControllerTest {
                 .andExpect(result -> {
                     String actualJson = result.getResponse().getContentAsString();
                     String expectedJsonString = """
-                        {
-                          "data": {
-                            "id": 1
-                          },
-                          "message": "Actor 생성을 완료했습니다.",
-                          "status": 200
-                        }
-                    """;
-                    assertTrue(JsonComparator.compareJsonStrings(actualJson, expectedJsonString));
+                                {
+                                  "data": {
+                                    "id": 1
+                                  },
+                                  "message": "Actor 생성을 완료했습니다.",
+                                  "status": 200
+                                }
+                            """;
+                    assertJsonEquals(actualJson, expectedJsonString);
                 });
 
         // then

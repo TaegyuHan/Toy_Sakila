@@ -1,11 +1,10 @@
 package com.toy.sakila.language.adapter.in.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.toy.sakila.category.application.port.in.CategoryCreationCommand;
 import com.toy.sakila.language.application.port.in.LanguageCreationCommand;
 import com.toy.sakila.language.application.port.in.LanguageCreationUseCase;
 import com.toy.sakila.language.domain.Language;
-import org.json.JSONObject;
+import com.toy.sakila.utils.JsonComparator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -57,8 +56,7 @@ class LanguageCreationControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(result -> {
                     String actualJson = result.getResponse().getContentAsString();
-                    JSONObject actualJSON = new JSONObject(actualJson);
-                    JSONObject expectedJSON = new JSONObject("""
+                    String expectedJson = """
                                 {
                                   "data": {
                                     "id": 1
@@ -66,8 +64,8 @@ class LanguageCreationControllerTest {
                                   "message": "Language 생성을 완료했습니다.",
                                   "status": 200
                                 }
-                            """);
-                    assertEquals(expectedJSON.toString(), actualJSON.toString());
+                            """;
+                    JsonComparator.compareJsonStrings(actualJson, expectedJson);
                 });
 
         // then

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.toy.sakila.language.application.port.in.LanguageUpdateCommand;
 import com.toy.sakila.language.application.port.in.LanguageUpdateUseCase;
 import com.toy.sakila.language.domain.Language;
-import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -17,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 
+import static com.toy.sakila.utils.JsonComparator.assertJsonEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
@@ -38,7 +38,7 @@ class LanguageUpdateControllerTest {
 
     @Captor
     private ArgumentCaptor<LanguageUpdateCommand> commandCaptor;
-    
+
     @Captor
     private ArgumentCaptor<Language.LanguageId> idCaptor;
 
@@ -67,8 +67,7 @@ class LanguageUpdateControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(result -> {
                     String actualJson = result.getResponse().getContentAsString();
-                    JSONObject actualJSON = new JSONObject(actualJson);
-                    JSONObject expectedJSON = new JSONObject("""
+                    String expectedJson = """
                                 {
                                   "data": {
                                     "lastUpdate": "2023-11-18T21:19:12",
@@ -78,8 +77,8 @@ class LanguageUpdateControllerTest {
                                   "message": "Language 수정을 완료했습니다.",
                                   "status": 200
                                 }
-                            """);
-                    assertEquals(expectedJSON.toString(), actualJSON.toString());
+                            """;
+                    assertJsonEquals(actualJson, expectedJson);
                 });
 
         // then
