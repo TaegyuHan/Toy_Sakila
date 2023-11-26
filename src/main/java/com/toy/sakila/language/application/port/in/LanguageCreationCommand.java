@@ -1,7 +1,7 @@
 package com.toy.sakila.language.application.port.in;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
 @Value
 @Builder
@@ -9,6 +9,6 @@ import org.antlr.v4.runtime.misc.NotNull;
 @NoArgsConstructor(force = true)
 @EqualsAndHashCode(callSuper = false)
 public class LanguageCreationCommand {
-    @NotNull
+    @NotBlank
     private final String name;
 }

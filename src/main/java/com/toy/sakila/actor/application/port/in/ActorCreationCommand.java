@@ -1,7 +1,7 @@
 package com.toy.sakila.actor.application.port.in;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
 @Value
 @Builder
@@ -9,8 +9,8 @@ import org.antlr.v4.runtime.misc.NotNull;
 @NoArgsConstructor(force = true)
 @EqualsAndHashCode(callSuper = false)
 public class ActorCreationCommand {
-    @NotNull
+    @NotBlank
     private final String firstName;
-    @NotNull
+    @NotBlank
     private final String lastName;
 }

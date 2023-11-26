@@ -1,5 +1,6 @@
 package com.toy.sakila.actor.application.port.in;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Value
@@ -8,9 +9,9 @@ import lombok.*;
 @NoArgsConstructor(force = true)
 @EqualsAndHashCode(callSuper = false)
 public class ActorUpdateCommand {
-    @NonNull
+    @NotBlank
     private final String firstName;
 
-    @NonNull
+    @NotBlank
     private final String lastName;
 }

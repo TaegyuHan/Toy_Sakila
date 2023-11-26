@@ -1,5 +1,6 @@
 package com.toy.sakila.category.application.port.in;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
@@ -9,6 +10,6 @@ import org.antlr.v4.runtime.misc.NotNull;
 @NoArgsConstructor(force = true)
 @EqualsAndHashCode(callSuper = false)
 public class CategoryCreationCommand {
-    @NotNull
+    @NotBlank
     private final String name;
 }

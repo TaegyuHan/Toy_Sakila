@@ -8,6 +8,7 @@ import com.toy.sakila.common.adapter.in.web.ResponseBody;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -22,8 +23,8 @@ public class ActorUpdateController {
     
     @PostMapping("/{id}")
     public ResponseEntity<ResponseBody<Object>> actorUpdate(
-            @PathVariable Long id,
-            @RequestBody ActorUpdateCommand command
+            @Validated @PathVariable Long id,
+            @Validated @RequestBody ActorUpdateCommand command
     ) {
         Actor domain = actorUpdateUseCase.update(new Actor.ActorId(id), command);
 
