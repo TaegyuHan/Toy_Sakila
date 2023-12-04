@@ -3,6 +3,7 @@ package com.toy.sakila.language.adapter.out.persistence;
 
 import com.toy.sakila.common.PersistenceAdapter;
 import com.toy.sakila.language.application.port.out.LanguageCreationPort;
+import com.toy.sakila.language.application.port.out.LanguageReadPort;
 import com.toy.sakila.language.application.port.out.LanguageUpdatePort;
 import com.toy.sakila.language.domain.Language;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 @PersistenceAdapter
 @RequiredArgsConstructor
 public class LanguagePersistenceAdapter
-        implements LanguageCreationPort, LanguageUpdatePort {
+        implements LanguageCreationPort, LanguageUpdatePort, LanguageReadPort {
 
     private final SpringDataLanguageRepository springDataRepository;
     private final LanguagePersistenceMapper mapper;
@@ -27,5 +28,12 @@ public class LanguagePersistenceAdapter
                 .orElseThrow();
         entity.setName(language.getName());
         return mapper.mapToDomainEntity(springDataRepository.save(entity));
+    }
+
+    @Override
+    public Language findById(Language.LanguageId id) {
+        return springDataRepository.findById(id.getValue())
+                .map(mapper::mapToDomainEntity)
+                .orElseThrow();
     }
 }
