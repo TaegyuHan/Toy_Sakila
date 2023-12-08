@@ -8,6 +8,7 @@ import com.toy.sakila.language.application.port.out.LanguageUpdatePort;
 import com.toy.sakila.language.domain.Language;
 import lombok.RequiredArgsConstructor;
 
+
 @PersistenceAdapter
 @RequiredArgsConstructor
 public class LanguagePersistenceAdapter
