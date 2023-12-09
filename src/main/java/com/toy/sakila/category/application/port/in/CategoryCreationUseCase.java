@@ -5,5 +5,5 @@ import com.toy.sakila.common.UseCase;
 
 @UseCase
 public interface CategoryCreationUseCase {
-    Category.CategoryId create(CategoryCreationCommand command);
+    Category create(CategoryCreationCommand command);
 }

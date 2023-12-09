@@ -9,6 +9,5 @@ import lombok.*;
 @NoArgsConstructor(force = true)
 @EqualsAndHashCode(callSuper = false)
 public class CategoryUpdateCommand {
-    @NotBlank
-    private final String name;
+    @NotBlank String name;
 }

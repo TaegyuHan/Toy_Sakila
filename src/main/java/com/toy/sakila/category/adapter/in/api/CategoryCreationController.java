@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+
 @RequiredArgsConstructor
 @WebAdapter
 @RestController
@@ -25,16 +27,11 @@ public class CategoryCreationController {
     public ResponseEntity<ResponseBody<Object>> categoryCreation(
             @RequestBody CategoryCreationCommand command
     ) {
-
-        Category.CategoryId id = categoryCreationUseCase.create(command);
-
-        OutputDTO outputDto = OutputDTO.builder()
-                .id(id.getValue())
-                .build();
+        Category domain = categoryCreationUseCase.create(command);
 
         ResponseBody<Object> body = ResponseBody.builder()
                 .status(HttpStatus.OK.value())
-                .data(outputDto)
+                .data(OutputDTO.of(domain))
                 .message("Category 생성을 완료했습니다.")
                 .build();
 
@@ -42,10 +39,21 @@ public class CategoryCreationController {
     }
 
     @Value
-    @Getter
-    @Setter
+    @Getter @Setter
     @Builder
     public static class OutputDTO {
         Long id;
+        String name;
+        LocalDateTime lastUpdate;
+        LocalDateTime createdDate;
+
+        public static OutputDTO of(Category domain) {
+            return OutputDTO.builder()
+                    .id(domain.getId().getValue())
+                    .name(domain.getName())
+                    .lastUpdate(domain.getLastUpdate())
+                    .createdDate(domain.getCreatedDate())
+                    .build();
+        }
     }
 }

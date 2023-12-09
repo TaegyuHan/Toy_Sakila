@@ -2,9 +2,8 @@ package com.toy.sakila.category.application.service;
 
 import com.toy.sakila.category.application.port.in.CategoryCreationCommand;
 import com.toy.sakila.category.application.port.in.CategoryCreationUseCase;
-import com.toy.sakila.category.application.port.out.CategoryCreationPort;
+import com.toy.sakila.category.application.port.out.CategorySavePort;
 import com.toy.sakila.category.domain.Category;
-import com.toy.sakila.category.domain.Category.CategoryId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +11,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CategoryCreationService implements CategoryCreationUseCase {
 
-    private final CategoryCreationPort categoryCreationPort;
+    private final CategorySavePort categorySavePort;
 
     @Override
-    public CategoryId create(CategoryCreationCommand command) {
+    public Category create(CategoryCreationCommand command) {
         Category category = Category.builder()
                 .name(command.getName())
                 .build();
-        return categoryCreationPort.create(category);
+        return categorySavePort.save(category);
     }
 }

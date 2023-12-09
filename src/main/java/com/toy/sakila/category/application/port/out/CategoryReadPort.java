@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CategoryReadPort {
     List<Category> findByIdIn(List<Long> ids);
+    Category findById(Category.CategoryId id);
 }

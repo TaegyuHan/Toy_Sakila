@@ -27,15 +27,9 @@ public class CategoryUpdateController {
     ) {
         Category domain = categoryUpdateUseCase.update(Category.CategoryId.of(id), command);
 
-        OutputDTO outputDto = OutputDTO.builder()
-                .id(domain.getId().getValue())
-                .name(domain.getName())
-                .lastUpdate(domain.getLastUpdate())
-                .build();
-
         ResponseBody<Object> body = ResponseBody.builder()
                 .status(HttpStatus.OK.value())
-                .data(outputDto)
+                .data(OutputDTO.of(domain))
                 .message("Category 수정을 완료했습니다.")
                 .build();
 
@@ -50,5 +44,15 @@ public class CategoryUpdateController {
         Long id;
         String name;
         LocalDateTime lastUpdate;
+        LocalDateTime createdDate;
+
+        public static OutputDTO of(Category domain) {
+            return OutputDTO.builder()
+                    .id(domain.getId().getValue())
+                    .name(domain.getName())
+                    .lastUpdate(domain.getLastUpdate())
+                    .createdDate(domain.getCreatedDate())
+                    .build();
+        }
     }
 }

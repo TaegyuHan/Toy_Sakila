@@ -2,7 +2,8 @@ package com.toy.sakila.category.application.service;
 
 import com.toy.sakila.category.application.port.in.CategoryUpdateCommand;
 import com.toy.sakila.category.application.port.in.CategoryUpdateUseCase;
-import com.toy.sakila.category.application.port.out.CategoryUpdatePort;
+import com.toy.sakila.category.application.port.out.CategoryReadPort;
+import com.toy.sakila.category.application.port.out.CategorySavePort;
 import com.toy.sakila.category.domain.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,14 +12,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CategoryUpdateService implements CategoryUpdateUseCase {
 
-    private final CategoryUpdatePort categoryUpdatePort;
+    private final CategorySavePort categorySavePort;
+    private final CategoryReadPort categoryReadPort;
 
     @Override
     public Category update(Category.CategoryId id, CategoryUpdateCommand command) {
-        Category category = Category.builder()
-                .id(id)
-                .name(command.getName())
-                .build();
-        return categoryUpdatePort.update(category);
+        Category domain = categoryReadPort.findById(id);
+        domain.setName(command.getName());
+        return categorySavePort.save(domain);
     }
 }

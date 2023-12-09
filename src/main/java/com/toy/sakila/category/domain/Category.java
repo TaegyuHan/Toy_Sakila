@@ -1,26 +1,25 @@
 package com.toy.sakila.category.domain;
 
 
+import com.toy.sakila.common.domain.BaseDomain;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
-
-@Value
-@Getter
-@Builder
+@Getter @Setter
+@SuperBuilder
 @RequiredArgsConstructor
-public class Category {
+public class Category extends BaseDomain {
 
     private CategoryId id;
-
     @NonNull
-    private final String name;
-    private final LocalDateTime lastUpdate;
+    private String name;
+    private LocalDateTime lastUpdate;
 
     @Value
     @AllArgsConstructor(staticName = "of")
     public static class CategoryId {
-        private final Long value;
+        Long value;
     }
 }
