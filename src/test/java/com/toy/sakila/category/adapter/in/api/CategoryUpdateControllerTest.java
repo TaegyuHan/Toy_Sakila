@@ -48,7 +48,7 @@ class CategoryUpdateControllerTest {
     @DisplayName("성공 | REST API | POST | Category | 수정")
     void categoryUpdateTest() throws Exception {
         // given
-        Category.CategoryId id = new Category.CategoryId(1L);
+        Category.CategoryId id = Category.CategoryId.of(1L);
 
         CategoryUpdateCommand command = CategoryUpdateCommand.builder()
                 .name("Animation")

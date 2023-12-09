@@ -34,7 +34,7 @@ class CategoryCreationServiceTest {
         CategoryCreationCommand command = CategoryCreationCommand.builder()
                 .name("Animation")
                 .build();
-        Category.CategoryId expected = new Category.CategoryId(1L);
+        Category.CategoryId expected = Category.CategoryId.of(1L);
 
         given(categoryCreationPort.create(any(Category.class)))
                 .willReturn(expected);

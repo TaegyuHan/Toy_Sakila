@@ -15,7 +15,7 @@ public class CategoryPersistenceMapper {
 
     public Category mapToDomainEntity(CategoryJpaEntity entity) {
         return Category.builder()
-                .id(new Category.CategoryId(entity.getId()))
+                .id(Category.CategoryId.of(entity.getId()))
                 .name(entity.getName())
                 .lastUpdate(entity.getLastUpdate())
                 .build();

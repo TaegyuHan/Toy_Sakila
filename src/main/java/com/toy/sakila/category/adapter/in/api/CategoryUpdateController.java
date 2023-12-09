@@ -25,7 +25,7 @@ public class CategoryUpdateController {
             @PathVariable Long id,
             @RequestBody CategoryUpdateCommand command
     ) {
-        Category domain = categoryUpdateUseCase.update(new Category.CategoryId(id), command);
+        Category domain = categoryUpdateUseCase.update(Category.CategoryId.of(id), command);
 
         OutputDTO outputDto = OutputDTO.builder()
                 .id(domain.getId().getValue())

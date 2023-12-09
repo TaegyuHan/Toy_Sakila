@@ -22,7 +22,7 @@ class CategoryPersistenceAdapter
     @Transactional
     public Category.CategoryId create(Category category) {
         CategoryJpaEntity entity = springDataRepository.save(mapper.mapToJpaEntity(category));
-        return new Category.CategoryId(entity.getId());
+        return Category.CategoryId.of(entity.getId());
     }
 
     @Override

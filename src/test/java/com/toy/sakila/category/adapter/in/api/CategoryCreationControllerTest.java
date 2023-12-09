@@ -50,7 +50,7 @@ class CategoryCreationControllerTest {
                 .build();
 
         given(categoryCreationUseCase.create(any(CategoryCreationCommand.class)))
-                .willReturn(new Category.CategoryId(1L));
+                .willReturn(Category.CategoryId.of(1L));
 
         // when
         mockMvc.perform(post("/film/category")

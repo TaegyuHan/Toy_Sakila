@@ -35,7 +35,7 @@ class CategoryUpdateServiceTest {
         CategoryUpdateCommand command = CategoryUpdateCommand.builder()
                 .name("Animation")
                 .build();
-        Category.CategoryId id = new Category.CategoryId(1L);
+        Category.CategoryId id = Category.CategoryId.of(1L);
 
         Category expected = Category.builder()
                 .id(id)

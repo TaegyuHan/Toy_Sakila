@@ -13,7 +13,7 @@ class CategoryTest {
     public void testCreateCategory() {
         // when
         Category category = Category.builder()
-                .id(new Category.CategoryId(1L))
+                .id(Category.CategoryId.of(1L))
                 .name("Animation")
                 .lastUpdate(LocalDateTime.parse("2023-11-18T13:45:00"))
                 .build();

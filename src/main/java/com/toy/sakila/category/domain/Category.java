@@ -19,7 +19,7 @@ public class Category {
     private final LocalDateTime lastUpdate;
 
     @Value
-    @AllArgsConstructor
+    @AllArgsConstructor(staticName = "of")
     public static class CategoryId {
         private final Long value;
     }
