@@ -7,10 +7,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
-@EqualsAndHashCode(callSuper = false)
 public class ActorCreationCommand {
-    @NotBlank
-    private final String firstName;
-    @NotBlank
-    private final String lastName;
+    @NotBlank String firstName;
+    @NotBlank String lastName;
 }

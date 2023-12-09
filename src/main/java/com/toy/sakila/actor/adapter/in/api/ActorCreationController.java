@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+
 @RequiredArgsConstructor
 @WebAdapter
 @RestController
@@ -25,26 +27,29 @@ public class ActorCreationController {
     public ResponseEntity<ResponseBody<Object>> actorCreation(
             @RequestBody ActorCreationCommand command
     ) {
-        Actor.ActorId id = actorCreationUseCase.create(command);
-
-        OutputDTO outputDto = OutputDTO.builder()
-                .id(id.getValue())
-                .build();
+        Actor domain = actorCreationUseCase.create(command);
 
         ResponseBody<Object> body = ResponseBody.builder()
                 .status(HttpStatus.OK.value())
-                .data(outputDto)
+                .data(OutputDTO.of(domain))
                 .message("Actor 생성을 완료했습니다.")
                 .build();
 
         return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
-    @Value
-    @Getter
-    @Setter
+    @Getter @Setter
     @Builder
     public static class OutputDTO {
         Long id;
+        LocalDateTime lastUpdate;
+        LocalDateTime createDate;
+        public static OutputDTO of(Actor domain) {
+            return OutputDTO.builder()
+                    .id(domain.getId().getValue())
+                    .lastUpdate(domain.getLastUpdate())
+                    .createDate(domain.getCreatedDate())
+                    .build();
+        }
     }
 }

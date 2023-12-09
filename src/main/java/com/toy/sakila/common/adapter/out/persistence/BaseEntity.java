@@ -14,10 +14,18 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public abstract class BaseEntity {
 
+    @Column(name = "created_date", nullable = false, updatable = false)
+    private LocalDateTime createdDate = LocalDateTime.now();
+
     @Column(name = "last_update", nullable = false)
     private LocalDateTime lastUpdate = LocalDateTime.now();
 
     @PrePersist
+    public void onPersist() {
+        createdDate = LocalDateTime.now();
+        lastUpdate = LocalDateTime.now();
+    }
+
     @PreUpdate
     public void onUpdate() {
         lastUpdate = LocalDateTime.now();

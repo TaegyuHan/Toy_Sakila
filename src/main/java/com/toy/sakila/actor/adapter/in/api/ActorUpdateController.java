@@ -20,24 +20,17 @@ import java.time.LocalDateTime;
 public class ActorUpdateController {
 
     private final ActorUpdateUseCase actorUpdateUseCase;
-    
+
     @PostMapping("/{id}")
     public ResponseEntity<ResponseBody<Object>> actorUpdate(
             @Validated @PathVariable Long id,
             @Validated @RequestBody ActorUpdateCommand command
     ) {
-        Actor domain = actorUpdateUseCase.update(new Actor.ActorId(id), command);
-
-        OutputDTO outputDto = OutputDTO.builder()
-                .id(domain.getId().getValue())
-                .firstName(domain.getFirstName())
-                .lastName(domain.getLastName())
-                .lastUpdate(domain.getLastUpdate())
-                .build();
+        Actor domain = actorUpdateUseCase.update(Actor.ActorId.of(id), command);
 
         ResponseBody<Object> body = ResponseBody.builder()
                 .status(HttpStatus.OK.value())
-                .data(outputDto)
+                .data(OutputDTO.of(domain))
                 .message("Actor 수정을 완료했습니다.")
                 .build();
 
@@ -53,5 +46,14 @@ public class ActorUpdateController {
         String firstName;
         String lastName;
         LocalDateTime lastUpdate;
+
+        public static OutputDTO of(Actor domain) {
+            return OutputDTO.builder()
+                    .id(domain.getId().getValue())
+                    .firstName(domain.getFirstName())
+                    .lastName(domain.getLastName())
+                    .lastUpdate(domain.getLastUpdate())
+                    .build();
+        }
     }
 }

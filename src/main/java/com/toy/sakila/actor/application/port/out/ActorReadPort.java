@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ActorReadPort {
     List<Actor> findByIdIn(List<Long> ids);
+
+    Actor findById(Actor.ActorId id);
 }

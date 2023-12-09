@@ -14,8 +14,8 @@ public class ActorPersistenceMapper {
     }
 
     public Actor mapToDomainEntity(ActorJpaEntity entity) {
-        return Actor.builder()
-                .id(new Actor.ActorId(entity.getId()))
+        return (Actor) Actor.builder()
+                .id(Actor.ActorId.of(entity.getId()))
                 .firstName(entity.getFirstName())
                 .lastName(entity.getLastName())
                 .lastUpdate(entity.getLastUpdate())

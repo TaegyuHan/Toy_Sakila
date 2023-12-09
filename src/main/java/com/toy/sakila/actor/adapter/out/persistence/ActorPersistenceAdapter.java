@@ -1,43 +1,47 @@
 package com.toy.sakila.actor.adapter.out.persistence;
 
-import com.toy.sakila.actor.application.port.out.ActorCreationPort;
 import com.toy.sakila.actor.application.port.out.ActorReadPort;
-import com.toy.sakila.actor.application.port.out.ActorUpdatePort;
+import com.toy.sakila.actor.application.port.out.ActorSavePort;
 import com.toy.sakila.actor.domain.Actor;
 import com.toy.sakila.common.PersistenceAdapter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
 @PersistenceAdapter
+@Transactional
 public class ActorPersistenceAdapter
-        implements ActorCreationPort, ActorUpdatePort, ActorReadPort {
+        implements ActorReadPort, ActorSavePort {
 
     private final ActorPersistenceMapper mapper;
     private final SpringDataActorRepository springDataActorRepository;
 
     @Override
-    public Actor.ActorId create(Actor actor) {
-        ActorJpaEntity entity = springDataActorRepository.save(mapper.mapToJpaEntity(actor));
-        return new Actor.ActorId(entity.getId());
-    }
-
-    @Override
-    public Actor update(Actor actor) {
-        ActorJpaEntity entity = springDataActorRepository.findById(actor.getId().getValue())
-                .orElseThrow();
-        entity.setFirstName(actor.getFirstName());
-        entity.setLastName(actor.getLastName());
-        return mapper.mapToDomainEntity(springDataActorRepository.save(entity));
-    }
-
-    @Override
+    @Transactional(readOnly = true)
     public List<Actor> findByIdIn(List<Long> ids) {
         return springDataActorRepository.findByIdIn(ids).stream()
                 .map(mapper::mapToDomainEntity)
                 .toList();
+    }
+
+    @Override
+    public Actor findById(Actor.ActorId id) {
+        return springDataActorRepository.findById(id.getValue())
+                .map(mapper::mapToDomainEntity)
+                .orElseThrow();
+    }
+
+    @Override
+    public Actor save(Actor actor) {
+        return Optional.of(actor)
+                .map(mapper::mapToJpaEntity)
+                .map(springDataActorRepository::save)
+                .map(mapper::mapToDomainEntity)
+                .orElseThrow();
     }
 }
