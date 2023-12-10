@@ -5,8 +5,9 @@ import com.toy.sakila.category.application.port.out.CategoryReadPort;
 import com.toy.sakila.category.application.port.out.CategorySavePort;
 import com.toy.sakila.category.domain.Category;
 import com.toy.sakila.common.PersistenceAdapter;
-import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,13 +22,17 @@ class CategoryPersistenceAdapter
     private final CategoryPersistenceMapper mapper;
 
     @Override
-    public List<Category> findByIdIn(List<Long> ids) {
-        return springDataRepository.findByIdIn(ids).stream()
-                .map(mapper::mapToDomainEntity)
-                .toList();
+    @Transactional(readOnly = true)
+    public List<Category> findByIdIn(List<Category.CategoryId> ids) {
+        return Optional.of(ids)
+                .map(mapper::mapToJpaEntityIds)
+                .map(springDataRepository::findByIdIn)
+                .map(mapper::mapToDomainEntities)
+                .orElseThrow();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Category findById(Category.CategoryId id) {
         return springDataRepository.findById(id.getValue())
                 .map(mapper::mapToDomainEntity)

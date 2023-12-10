@@ -3,13 +3,15 @@ package com.toy.sakila.category.adapter.out.persistence;
 import com.toy.sakila.category.domain.Category;
 import com.toy.sakila.common.Mapper;
 
+import java.util.List;
+
 @Mapper
 public class CategoryPersistenceMapper {
 
-    public CategoryJpaEntity mapToJpaEntity(Category category) {
+    public CategoryJpaEntity mapToJpaEntity(Category domain) {
         return CategoryJpaEntity.builder()
-                .id(category.getId().getValue())
-                .name(category.getName())
+                .id(domain.getId().getValue())
+                .name(domain.getName())
                 .build();
     }
 
@@ -19,5 +21,23 @@ public class CategoryPersistenceMapper {
                 .name(entity.getName())
                 .lastUpdate(entity.getLastUpdate())
                 .build();
+    }
+
+    public List<Long> mapToJpaEntityIds(List<Category.CategoryId> domainIds) {
+        return domainIds.stream()
+                .map(Category.CategoryId::getValue)
+                .toList();
+    }
+
+    public List<Category> mapToDomainEntities(List<CategoryJpaEntity> categoryJpaEntities) {
+        return categoryJpaEntities.stream()
+                .map(this::mapToDomainEntity)
+                .toList();
+    }
+
+    public List<CategoryJpaEntity> mapToJpaEntities(List<Category> categories) {
+        return categories.stream()
+                .map(this::mapToJpaEntity)
+                .toList();
     }
 }

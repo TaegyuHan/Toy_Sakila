@@ -52,7 +52,6 @@ public class CategoryCreationController {
                     .id(domain.getId().getValue())
                     .name(domain.getName())
                     .lastUpdate(domain.getLastUpdate())
-                    .createdDate(domain.getCreatedDate())
                     .build();
         }
     }
