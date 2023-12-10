@@ -3,7 +3,7 @@ package com.toy.sakila.city.application.service;
 
 import com.toy.sakila.city.application.port.in.CityCreationCommand;
 import com.toy.sakila.city.application.port.in.CityCreationUseCase;
-import com.toy.sakila.city.application.port.out.CityCreationPort;
+import com.toy.sakila.city.application.port.out.CitySavePort;
 import com.toy.sakila.city.domain.City;
 import com.toy.sakila.country.application.port.out.CountryReadPort;
 import com.toy.sakila.country.domain.Country;
@@ -17,16 +17,16 @@ public class CityCreationService
         implements CityCreationUseCase {
 
     private final CountryReadPort countryReadPort;
-    private final CityCreationPort cityCreationPort;
+    private final CitySavePort citySavePort;
 
     @Override
     @Transactional
-    public City.CityId create(CityCreationCommand command) {
+    public City create(CityCreationCommand command) {
         Country country = countryReadPort.findById(Country.CountryId.of(command.getCountryId()));
         City city = City.builder()
                 .city(command.getCity())
                 .country(country)
                 .build();
-        return cityCreationPort.create(city);
+        return citySavePort.save(city);
     }
 }

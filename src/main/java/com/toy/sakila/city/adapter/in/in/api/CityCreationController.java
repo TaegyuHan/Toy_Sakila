@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+
 
 @RequiredArgsConstructor
 @WebAdapter
@@ -25,25 +27,31 @@ public class CityCreationController {
     public ResponseEntity<ResponseBody<Object>> cityCreation(
             @RequestBody CityCreationCommand command
     ){
-        City.CityId id = cityCreationUseCase.create(command);
-
-        OutputDTO outputDTO = OutputDTO.builder()
-                .id(id.getValue())
-                .build();
+        City domain = cityCreationUseCase.create(command);
 
         ResponseBody<Object> body = ResponseBody.builder()
                 .status(200)
-                .data(outputDTO)
+                .data(OutputDTO.of(domain))
                 .message("City 생성을 완료했습니다.")
                 .build();
 
         return ResponseEntity.ok(body);
     }
 
-    @Value
     @Getter @Setter
     @Builder
     public static class OutputDTO {
         Long id;
+        String city;
+        Long countryId;
+        LocalDateTime lastUpdate;
+
+        public static OutputDTO of(City city) {
+            return OutputDTO.builder()
+                    .id(city.getCityId().getValue())
+                    .city(city.getCity())
+                    .lastUpdate(city.getLastUpdate())
+                    .build();
+        }
     }
 }

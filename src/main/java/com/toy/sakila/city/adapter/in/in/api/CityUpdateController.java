@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @RequiredArgsConstructor
 @WebAdapter
 @RestController
@@ -23,28 +25,31 @@ public class CityUpdateController {
             @PathVariable Long id,
             @RequestBody CityUpdateCommand command
     ) {
-        City city = countryUpdateUseCase.update(City.CityId.of(id), command);
-
-        CityUpdateController.OutputDTO outputDto = OutputDTO.builder()
-                .id(city.getCityId().getValue())
-                .city(city.getCity())
-                .build();
+        City domain = countryUpdateUseCase.update(City.CityId.of(id), command);
 
         ResponseBody<Object> body = ResponseBody.builder()
                 .status(HttpStatus.OK.value())
-                .data(outputDto)
+                .data(OutputDTO.of(domain))
                 .message("City 수정을 완료했습니다.")
                 .build();
 
         return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
-    @Value
-    @Getter
-    @Setter
+    @Getter @Setter
     @Builder
     public static class OutputDTO {
         Long id;
         String city;
+        Integer countryId;
+        LocalDateTime lastUpdate;
+
+        public static OutputDTO of(City city) {
+            return OutputDTO.builder()
+                    .id(city.getCityId().getValue())
+                    .countryId(city.getCountry().getId().getValue())
+                    .city(city.getCity())
+                    .build();
+        }
     }
 }

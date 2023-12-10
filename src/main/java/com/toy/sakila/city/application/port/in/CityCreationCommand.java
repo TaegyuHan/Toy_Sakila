@@ -8,6 +8,6 @@ import lombok.*;
 @NoArgsConstructor(force = true)
 @EqualsAndHashCode(callSuper = false)
 public class CityCreationCommand {
-    private final String city;
-    private final Integer countryId;
+    String city;
+    Integer countryId;
 }
