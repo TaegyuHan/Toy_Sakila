@@ -1,23 +1,25 @@
 package com.toy.sakila.actor.domain;
 
-import com.toy.sakila.common.domain.BaseDomain;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
+
+import java.time.LocalDateTime;
 
 
 @Getter
 @Setter
-@SuperBuilder
+@Builder
 @AllArgsConstructor
-public class Actor extends BaseDomain {
+public class Actor {
 
     private final ActorId id;
     private String lastName;
     private String firstName;
+    private LocalDateTime lastUpdate;
+    private LocalDateTime createdDate;
 
     @Value
     @AllArgsConstructor(staticName = "of")
     public static class ActorId {
-        private final Long value;
+        Long value;
     }
 }

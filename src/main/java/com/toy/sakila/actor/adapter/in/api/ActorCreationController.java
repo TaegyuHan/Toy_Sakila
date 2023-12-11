@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 
+
 @RequiredArgsConstructor
 @WebAdapter
 @RestController
@@ -38,18 +39,22 @@ public class ActorCreationController {
         return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
-    @Getter @Setter
     @Builder
-    public static class OutputDTO {
-        Long id;
-        LocalDateTime lastUpdate;
-        LocalDateTime createDate;
-        public static OutputDTO of(Actor domain) {
-            return OutputDTO.builder()
-                    .id(domain.getId().getValue())
-                    .lastUpdate(domain.getLastUpdate())
-                    .createDate(domain.getCreatedDate())
-                    .build();
+    private record OutputDTO(
+            Long id,
+            String lastName,
+            String firstName,
+            LocalDateTime lastUpdate,
+            LocalDateTime createdDate
+    ) {
+            public static OutputDTO of(Actor domain) {
+                return OutputDTO.builder()
+                        .id(domain.getId().getValue())
+                        .firstName(domain.getFirstName())
+                        .lastName(domain.getLastName())
+                        .lastUpdate(domain.getLastUpdate())
+                        .createdDate(domain.getCreatedDate())
+                        .build();
+            }
         }
-    }
 }

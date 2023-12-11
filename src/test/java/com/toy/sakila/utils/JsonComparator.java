@@ -3,12 +3,8 @@ package com.toy.sakila.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class JsonComparator {
 
@@ -28,7 +24,7 @@ public class JsonComparator {
 
     public static void assertJsonEquals(String actualJson, String expectedJson) throws JsonProcessingException {
         assertThat(compareJsonStrings(actualJson, expectedJson))
-                .as("두 JSON 문자열이 동일한지 비교합니다.")
+                .as("JSON 반환 객체가 서로 다름.")
                 .isTrue();
     }
 }

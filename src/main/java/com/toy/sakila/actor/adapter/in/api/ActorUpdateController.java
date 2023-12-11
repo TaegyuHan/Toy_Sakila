@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
+
 @RequiredArgsConstructor
 @WebAdapter
 @RestController
@@ -37,22 +38,21 @@ public class ActorUpdateController {
         return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
-    @Value
-    @Getter
-    @Setter
     @Builder
-    public static class OutputDTO {
-        Long id;
-        String firstName;
-        String lastName;
-        LocalDateTime lastUpdate;
-
+    private record OutputDTO(
+            Long id,
+            String firstName,
+            String lastName,
+            LocalDateTime lastUpdate,
+            LocalDateTime createdDate
+    ) {
         public static OutputDTO of(Actor domain) {
             return OutputDTO.builder()
                     .id(domain.getId().getValue())
                     .firstName(domain.getFirstName())
                     .lastName(domain.getLastName())
                     .lastUpdate(domain.getLastUpdate())
+                    .createdDate(domain.getCreatedDate())
                     .build();
         }
     }

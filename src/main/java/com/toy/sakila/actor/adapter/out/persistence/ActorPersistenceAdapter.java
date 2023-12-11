@@ -7,7 +7,6 @@ import com.toy.sakila.common.PersistenceAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -23,10 +22,12 @@ public class ActorPersistenceAdapter
 
     @Override
     @Transactional(readOnly = true)
-    public List<Actor> findByIdIn(List<Long> ids) {
-        return springDataActorRepository.findByIdIn(ids).stream()
-                .map(mapper::mapToDomainEntity)
-                .toList();
+    public List<Actor> findByIdIn(List<Actor.ActorId> ids) {
+        return Optional.of(ids)
+                        .map(mapper::mapToJpaEntityIds)
+                        .map(springDataActorRepository::findByIdIn)
+                        .map(mapper::mapToDomainEntities)
+                        .orElseThrow();
     }
 
     @Override
