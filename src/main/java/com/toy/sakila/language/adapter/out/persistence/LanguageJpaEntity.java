@@ -4,6 +4,7 @@ import com.toy.sakila.common.adapter.out.persistence.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+
 @Getter
 @Setter
 @Builder

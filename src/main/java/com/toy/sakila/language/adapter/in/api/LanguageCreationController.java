@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+
+
 @RequiredArgsConstructor
 @WebAdapter
 @RestController
@@ -26,26 +29,31 @@ public class LanguageCreationController {
     public ResponseEntity<ResponseBody<Object>> languageCreation(
             @RequestBody LanguageCreationCommand command
     ) {
-        Language.LanguageId id = languageCreationUseCase.create(command);
-
-        OutputDTO outputDto = OutputDTO.builder()
-                .id(id.getValue())
-                .build();
+        Language domain = languageCreationUseCase.create(command);
 
         ResponseBody<Object> body = ResponseBody.builder()
                 .status(HttpStatus.OK.value())
-                .data(outputDto)
+                .data(OutputDTO.of(domain))
                 .message("Language 생성을 완료했습니다.")
                 .build();
 
         return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
-    @Value
-    @Getter
-    @Setter
     @Builder
-    public static class OutputDTO {
-        Long id;
+    private record OutputDTO(
+            Long id,
+            String name,
+            LocalDateTime lastUpdate,
+            LocalDateTime createDate
+    ) {
+        public static OutputDTO of(Language domain) {
+            return OutputDTO.builder()
+                    .id(domain.getId().getValue())
+                    .name(domain.getName())
+                    .lastUpdate(domain.getLastUpdate())
+                    .createDate(domain.getCreateDate())
+                    .build();
+        }
     }
 }

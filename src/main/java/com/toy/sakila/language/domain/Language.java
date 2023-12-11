@@ -1,24 +1,21 @@
 package com.toy.sakila.language.domain;
 
-
 import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Value
-@Getter
+@Getter @Setter
 @Builder
 @RequiredArgsConstructor
 public class Language {
-    private Language.LanguageId id;
-
-    @NonNull
-    private final String name;
-    private final LocalDateTime lastUpdate;
+    private final Language.LanguageId id;
+    private String name;
+    private LocalDateTime lastUpdate;
+    private LocalDateTime createDate;
 
     @Value
     @AllArgsConstructor
     public static class LanguageId {
-        private final Long value;
+        Long value;
     }
 }
