@@ -8,13 +8,13 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Value
+
 @Getter @Setter
 @Builder
 @RequiredArgsConstructor
 public class Film {
 
-    private Film.FilmId id;
+    private final Film.FilmId id;
 
     private String title;
 

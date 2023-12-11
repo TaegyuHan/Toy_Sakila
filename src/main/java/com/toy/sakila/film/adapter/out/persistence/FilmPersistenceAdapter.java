@@ -17,12 +17,11 @@ public class FilmPersistenceAdapter
     private final FilmPersistenceMapper filmPersistenceMapper;
 
     @Override
-    public Film.FilmId create(Film domain) {
+    public Film create(Film domain) {
         return Optional.of(domain)
                 .map(filmPersistenceMapper::mapToJpaEntity)
                 .map(filmRepository::save)
-                .map(FilmJpaEntity::getFilmId)
-                .map(Film.FilmId::of)
+                .map(filmPersistenceMapper::mapToDomainEntity)
                 .orElseThrow();
     }
 }

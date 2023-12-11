@@ -15,30 +15,17 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
 @EqualsAndHashCode(callSuper = false)
-public class FilmCreationCommand {
-    private String title;
-
-    private String description;
-
-    private Short releaseYear;
-
-    private List<Actor.ActorId> actorIds;
-
-    private List<Category.CategoryId> categoryIds;
-
-    private Long languageId;
-
-    private Long originalLanguageId;
-
-    private Short rentalDuration;
-
-    private BigDecimal rentalRate;
-
-    private Short length;
-
-    private BigDecimal replacementCost;
-
-    private EnumFilmRating rating;
-
-    private List<EnumSpecialFeature> specialFeatures;
+public class FilmCreationCommand { String title;
+    String description;
+    Short releaseYear;
+    List<Actor.ActorId> actorIds;
+    List<Category.CategoryId> categoryIds;
+    Long languageId;
+    Long originalLanguageId;
+    Short rentalDuration;
+    BigDecimal rentalRate;
+    Short length;
+    BigDecimal replacementCost;
+    EnumFilmRating rating;
+    List<EnumSpecialFeature> specialFeatures;
 }

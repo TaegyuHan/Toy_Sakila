@@ -24,12 +24,11 @@ public class FilmCreationService
     private final LanguageReadPort languageReadPort;
     private final ActorReadPort actorReadPort;
     private final CategoryReadPort categoryReadPort;
-
     private final FilmCreationPort filmCreationPort;
 
     @Override
     @Transactional
-    public Film.FilmId create(FilmCreationCommand command) {
+    public Film create(FilmCreationCommand command) {
         List<Actor> actors = actorReadPort.findByIdIn(command.getActorIds());
         List<Category> categories = categoryReadPort.findByIdIn(command.getCategoryIds());
         Language language = languageReadPort.findById(new Language.LanguageId(command.getLanguageId()));

@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 public class Category {
 
     private final CategoryId id;
-    @NonNull
     private String name;
     private LocalDateTime lastUpdate;
 

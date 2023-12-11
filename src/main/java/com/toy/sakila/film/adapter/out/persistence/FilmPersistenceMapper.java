@@ -13,19 +13,36 @@ public class FilmPersistenceMapper {
 
     private final LanguagePersistenceMapper languagePersistenceMapper;
 
-    public FilmJpaEntity mapToJpaEntity(Film film) {
+    public FilmJpaEntity mapToJpaEntity(Film domain) {
         return FilmJpaEntity.builder()
-                .title(film.getTitle())
-                .description(film.getDescription())
-                .releaseYear(film.getReleaseYear())
-                .language(languagePersistenceMapper.mapToJpaEntity(film.getLanguage()))
-                .originalLanguage(languagePersistenceMapper.mapToJpaEntity(film.getOriginalLanguage()))
-                .rentalDuration(film.getRentalDuration())
-                .rentalRate(film.getRentalRate())
-                .length(film.getLength())
-                .replacementCost(film.getReplacementCost())
-                .rating(film.getRating())
-                .specialFeatures(new HashSet<>(film.getSpecialFeatures()))
+                .title(domain.getTitle())
+                .description(domain.getDescription())
+                .releaseYear(domain.getReleaseYear())
+                .language(languagePersistenceMapper.mapToJpaEntity(domain.getLanguage()))
+                .originalLanguage(languagePersistenceMapper.mapToJpaEntity(domain.getOriginalLanguage()))
+                .rentalDuration(domain.getRentalDuration())
+                .rentalRate(domain.getRentalRate())
+                .length(domain.getLength())
+                .replacementCost(domain.getReplacementCost())
+                .rating(domain.getRating())
+                .specialFeatures(new HashSet<>(domain.getSpecialFeatures()))
+                .build();
+    }
+
+    public Film mapToDomainEntity(FilmJpaEntity entity) {
+        return Film.builder()
+                .id(Film.FilmId.of(entity.getFilmId()))
+                .title(entity.getTitle())
+                .description(entity.getDescription())
+                .releaseYear(entity.getReleaseYear())
+                .language(languagePersistenceMapper.mapToDomainEntity(entity.getLanguage()))
+                .originalLanguage(languagePersistenceMapper.mapToDomainEntity(entity.getOriginalLanguage()))
+                .rentalDuration(entity.getRentalDuration())
+                .rentalRate(entity.getRentalRate())
+                .length(entity.getLength())
+                .replacementCost(entity.getReplacementCost())
+                .rating(entity.getRating())
+                .specialFeatures(entity.getSpecialFeatures().stream().toList())
                 .build();
     }
 }
