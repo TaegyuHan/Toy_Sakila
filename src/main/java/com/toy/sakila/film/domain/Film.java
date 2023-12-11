@@ -11,10 +11,10 @@ import java.util.List;
 
 @Getter @Setter
 @Builder
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class Film {
 
-    private final Film.FilmId id;
+    private final FilmId id;
 
     private String title;
 
@@ -45,6 +45,6 @@ public class Film {
     @Value
     @AllArgsConstructor(staticName = "of")
     public static class FilmId {
-        private final Long value;
+        Long value;
     }
 }

@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Getter @Setter
 @Builder
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class Country {
     private final CountryId id;
     private String country;

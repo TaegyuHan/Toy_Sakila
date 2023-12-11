@@ -6,15 +6,15 @@ import java.time.LocalDateTime;
 
 @Getter @Setter
 @Builder
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class Language {
-    private final Language.LanguageId id;
+    private final LanguageId id;
     private String name;
     private LocalDateTime lastUpdate;
-    private LocalDateTime createDate;
+    private LocalDateTime createdDate;
 
     @Value
-    @AllArgsConstructor
+    @AllArgsConstructor(staticName = "of")
     public static class LanguageId {
         Long value;
     }

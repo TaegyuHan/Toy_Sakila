@@ -27,30 +27,31 @@ public class LanguageUpdateController {
             @PathVariable Long id,
             @RequestBody LanguageUpdateCommand command
     ) {
-        Language domain = languageUpdateUseCase.update(new Language.LanguageId(id), command);
-
-        OutputDTO outputDto = OutputDTO.builder()
-                .id(domain.getId().getValue())
-                .name(domain.getName())
-                .lastUpdate(domain.getLastUpdate())
-                .build();
+        Language domain = languageUpdateUseCase.update(Language.LanguageId.of(id), command);
 
         ResponseBody<Object> body = ResponseBody.builder()
                 .status(HttpStatus.OK.value())
-                .data(outputDto)
+                .data(OutputDTO.of(domain))
                 .message("Language 수정을 완료했습니다.")
                 .build();
 
         return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
-    @Value
-    @Getter
-    @Setter
     @Builder
-    public static class OutputDTO {
-        Long id;
-        String name;
-        LocalDateTime lastUpdate;
+    private record OutputDTO(
+            Long id,
+            String name,
+            LocalDateTime lastUpdate,
+            LocalDateTime createdDate
+    ) {
+        public static OutputDTO of(Language domain) {
+            return OutputDTO.builder()
+                    .id(domain.getId().getValue())
+                    .name(domain.getName())
+                    .lastUpdate(domain.getLastUpdate())
+                    .createdDate(domain.getCreatedDate())
+                    .build();
+        }
     }
 }

@@ -45,14 +45,14 @@ public class LanguageCreationController {
             Long id,
             String name,
             LocalDateTime lastUpdate,
-            LocalDateTime createDate
+            LocalDateTime createdDate
     ) {
         public static OutputDTO of(Language domain) {
             return OutputDTO.builder()
                     .id(domain.getId().getValue())
                     .name(domain.getName())
                     .lastUpdate(domain.getLastUpdate())
-                    .createDate(domain.getCreateDate())
+                    .createdDate(domain.getCreatedDate())
                     .build();
         }
     }

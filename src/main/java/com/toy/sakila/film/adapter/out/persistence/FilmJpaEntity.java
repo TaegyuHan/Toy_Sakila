@@ -66,18 +66,22 @@ public class FilmJpaEntity extends BaseEntity {
     @JoinColumn(name = "original_language_id")
     private LanguageJpaEntity originalLanguage;
 
+    @Builder.Default
     @Column(name = "rental_duration", nullable = false)
     private Short rentalDuration = 3;
 
+    @Builder.Default
     @Column(name = "rental_rate", nullable = false, precision = 4, scale = 2)
     private BigDecimal rentalRate = BigDecimal.valueOf(4.99);
 
     @Column(name = "length")
     private Short length;
 
+    @Builder.Default
     @Column(name = "replacement_cost", nullable = false, precision = 5, scale = 2)
     private BigDecimal replacementCost = BigDecimal.valueOf(19.99);
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "rating", columnDefinition = "ENUM('G','PG','PG-13','R','NC-17')")
     private EnumFilmRating rating = EnumFilmRating.G;

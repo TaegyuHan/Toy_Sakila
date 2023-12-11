@@ -16,21 +16,21 @@ public class CityPersistenceAdapter
         implements CitySavePort, CityReadPort {
 
     private final SpringDataCityRepository springDataCityRepository;
-    private final CityPersistenceMapper cityPersistenceMapper;
+    private final CityPersistenceMapper mapper;
 
     @Override
     public City save(City domain) {
         return Optional.of(domain)
-                .map(cityPersistenceMapper::mapToJpaEntity)
+                .map(mapper::mapToJpaEntity)
                 .map(springDataCityRepository::save)
-                .map(cityPersistenceMapper::mapToDomainEntity)
+                .map(mapper::mapToDomainEntity)
                 .orElseThrow();
     }
 
     @Override
     public City findById(City.CityId id) {
         return springDataCityRepository.findById(id.getValue())
-                .map(cityPersistenceMapper::mapToDomainEntity)
+                .map(mapper::mapToDomainEntity)
                 .orElseThrow();
     }
 }

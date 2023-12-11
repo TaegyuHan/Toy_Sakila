@@ -31,8 +31,8 @@ public class FilmCreationService
     public Film create(FilmCreationCommand command) {
         List<Actor> actors = actorReadPort.findByIdIn(command.getActorIds());
         List<Category> categories = categoryReadPort.findByIdIn(command.getCategoryIds());
-        Language language = languageReadPort.findById(new Language.LanguageId(command.getLanguageId()));
-        Language originalLanguage = languageReadPort.findById(new Language.LanguageId(command.getOriginalLanguageId()));
+        Language language = languageReadPort.findById(Language.LanguageId.of(command.getLanguageId()));
+        Language originalLanguage = languageReadPort.findById(Language.LanguageId.of(command.getOriginalLanguageId()));
 
         Film film = Film.builder()
                 .title(command.getTitle())
