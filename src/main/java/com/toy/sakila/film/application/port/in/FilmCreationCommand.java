@@ -1,6 +1,8 @@
 package com.toy.sakila.film.application.port.in;
 
 
+import com.toy.sakila.actor.domain.Actor;
+import com.toy.sakila.category.domain.Category;
 import com.toy.sakila.film.domain.EnumFilmRating;
 import com.toy.sakila.film.domain.EnumSpecialFeature;
 import lombok.*;
@@ -20,9 +22,9 @@ public class FilmCreationCommand {
 
     private Short releaseYear;
 
-    private List<Long> actorIds;
+    private List<Actor.ActorId> actorIds;
 
-    private List<Long> categoryIds;
+    private List<Category.CategoryId> categoryIds;
 
     private Long languageId;
 

@@ -4,12 +4,13 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+
 @Getter @Setter
 @Builder
 @AllArgsConstructor
 public class Category {
 
-    private CategoryId id;
+    private final CategoryId id;
     @NonNull
     private String name;
     private LocalDateTime lastUpdate;

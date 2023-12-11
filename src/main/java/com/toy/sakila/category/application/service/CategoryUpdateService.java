@@ -8,8 +8,9 @@ import com.toy.sakila.category.domain.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Service
+
 @RequiredArgsConstructor
+@Service
 public class CategoryUpdateService implements CategoryUpdateUseCase {
 
     private final CategorySavePort categorySavePort;

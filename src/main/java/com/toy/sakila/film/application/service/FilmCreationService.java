@@ -30,7 +30,6 @@ public class FilmCreationService
     @Override
     @Transactional
     public Film.FilmId create(FilmCreationCommand command) {
-
         List<Actor> actors = actorReadPort.findByIdIn(command.getActorIds());
         List<Category> categories = categoryReadPort.findByIdIn(command.getCategoryIds());
         Language language = languageReadPort.findById(new Language.LanguageId(command.getLanguageId()));

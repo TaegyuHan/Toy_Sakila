@@ -38,15 +38,13 @@ public class CategoryCreationController {
         return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
-    @Value
-    @Getter @Setter
     @Builder
-    public static class OutputDTO {
-        Long id;
-        String name;
-        LocalDateTime lastUpdate;
-        LocalDateTime createdDate;
-
+    private record OutputDTO(
+            Long id,
+            String name,
+            LocalDateTime lastUpdate,
+            LocalDateTime createdDate
+    ) {
         public static OutputDTO of(Category domain) {
             return OutputDTO.builder()
                     .id(domain.getId().getValue())

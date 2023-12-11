@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter @Setter
 @Builder
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class City {
 
     private final CityId cityId;
