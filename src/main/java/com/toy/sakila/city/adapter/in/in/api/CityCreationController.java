@@ -38,19 +38,20 @@ public class CityCreationController {
         return ResponseEntity.ok(body);
     }
 
-    @Getter @Setter
     @Builder
-    public static class OutputDTO {
-        Long id;
-        String city;
-        Long countryId;
-        LocalDateTime lastUpdate;
-
-        public static OutputDTO of(City city) {
+    private record OutputDTO(
+            Long id,
+            String city,
+            Long countryId,
+            LocalDateTime lastUpdate,
+            LocalDateTime createdDate
+    ) {
+        public static OutputDTO of(City domain) {
             return OutputDTO.builder()
-                    .id(city.getCityId().getValue())
-                    .city(city.getCity())
-                    .lastUpdate(city.getLastUpdate())
+                    .id(domain.getCityId().getValue())
+                    .city(domain.getCity())
+                    .lastUpdate(domain.getLastUpdate())
+                    .createdDate(domain.getCreatedDate())
                     .build();
         }
     }

@@ -11,12 +11,10 @@ import java.time.LocalDateTime;
 public class City {
 
     private final CityId cityId;
-
     private String city;
-
     private Country country;
-
     private LocalDateTime lastUpdate;
+    private LocalDateTime createdDate;
 
     @Value
     @AllArgsConstructor(staticName = "of")
