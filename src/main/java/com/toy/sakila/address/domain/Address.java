@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 public class Address {
-    private final AddressId addressId;
+    private final AddressId id;
     private String address;
     private String address2;
     private String district;
