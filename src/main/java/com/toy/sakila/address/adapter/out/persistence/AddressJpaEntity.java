@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "language")
+@Table(name = "address")
 public class AddressJpaEntity {
 
     @Id

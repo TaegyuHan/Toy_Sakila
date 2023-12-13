@@ -1,9 +1,6 @@
 package com.toy.sakila.common.adapter.out.persistence;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -13,9 +10,11 @@ import java.time.LocalDateTime;
 public abstract class BaseEntity {
 
     @Column(name = "created_date", nullable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime createdDate = LocalDateTime.now();
 
     @Column(name = "last_update", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime lastUpdate = LocalDateTime.now();
 
     @PrePersist

@@ -13,7 +13,7 @@ public class AddressPersistenceMapper {
 
     public AddressJpaEntity mapToJpaEntity(Address domain) {
         return AddressJpaEntity.builder()
-                .addressId(domain.getAddressId().getValue())
+                .addressId(domain.getId().getValue())
                 .address(domain.getAddress())
                 .address2(domain.getAddress2())
                 .district(domain.getDistrict())
@@ -25,7 +25,7 @@ public class AddressPersistenceMapper {
 
     public Address mapToDomainEntity(AddressJpaEntity jpaEntity) {
         return Address.builder()
-                .addressId(Address.AddressId.of(jpaEntity.getAddressId()))
+                .id(Address.AddressId.of(jpaEntity.getAddressId()))
                 .address(jpaEntity.getAddress())
                 .address2(jpaEntity.getAddress2())
                 .district(jpaEntity.getDistrict())
