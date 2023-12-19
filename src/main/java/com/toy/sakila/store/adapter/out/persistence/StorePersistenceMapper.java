@@ -23,4 +23,12 @@ public class StorePersistenceMapper {
                 .createdDate(entity.getCreatedDate())
                 .build();
     }
+
+    public StoreJpaEntity mapToJpaEntity(Store domain) {
+        return StoreJpaEntity.builder()
+                .storeId(domain.getId().getValue())
+                .address(addressPersistenceMapper.mapToJpaEntity(domain.getAddress()))
+                .managerStaff(staffPersistenceMapper.mapToJpaEntity(domain.getManagerStaff()))
+                .build();
+    }
 }

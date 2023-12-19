@@ -6,11 +6,13 @@ import com.toy.sakila.customer.application.port.out.CustomerReadPort;
 import com.toy.sakila.customer.application.port.out.CustomerSavePort;
 import com.toy.sakila.customer.domain.Customer;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @RequiredArgsConstructor
 @PersistenceAdapter
+@Transactional
 public class CustomerPersistenceAdapter
         implements CustomerSavePort, CustomerReadPort {
 
@@ -27,6 +29,7 @@ public class CustomerPersistenceAdapter
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Customer findById(Customer.CustomerId id) {
         return springDataCustomerRepository.findById(id.getValue())
                 .map(mapper::mapToDomainEntity)

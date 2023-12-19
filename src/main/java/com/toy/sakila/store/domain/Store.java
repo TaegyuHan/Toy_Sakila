@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Store {
     private final StoreId id;
-
     private Staff managerStaff;
     private Address address;
     private LocalDateTime lastUpdate;

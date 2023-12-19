@@ -20,4 +20,16 @@ public class StaffPersistenceMapper {
                 .createdDate(entity.getCreatedDate())
                 .build();
     }
+
+    public StaffJpaEntity mapToJpaEntity(Staff domain) {
+        return StaffJpaEntity.builder()
+                .staffId(domain.getId().getValue())
+                .firstName(domain.getFirstName())
+                .lastName(domain.getLastName())
+                .email(domain.getEmail())
+                .username(domain.getUsername())
+                .password(domain.getPassword())
+                .active(domain.isActive())
+                .build();
+    }
 }
