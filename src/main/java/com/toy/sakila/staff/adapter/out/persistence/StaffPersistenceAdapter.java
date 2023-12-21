@@ -6,6 +6,8 @@ import com.toy.sakila.staff.application.port.out.StaffSavePort;
 import com.toy.sakila.staff.domain.Staff;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @PersistenceAdapter
 public class StaffPersistenceAdapter implements StaffSavePort, StaffReadPort {
@@ -16,6 +18,15 @@ public class StaffPersistenceAdapter implements StaffSavePort, StaffReadPort {
     @Override
     public Staff findById(Staff.StaffId id) {
         return staffSpringDataJpaRepository.findById(id.getValue())
+                .map(mapper::mapToDomainEntity)
+                .orElseThrow();
+    }
+
+    @Override
+    public Staff save(Staff staff) {
+        return Optional.of(staff)
+                .map(mapper::mapToJpaEntity)
+                .map(staffSpringDataJpaRepository::save)
                 .map(mapper::mapToDomainEntity)
                 .orElseThrow();
     }
