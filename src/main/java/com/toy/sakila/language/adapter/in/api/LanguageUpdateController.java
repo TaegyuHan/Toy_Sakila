@@ -35,7 +35,7 @@ public class LanguageUpdateController {
                 .message("Language 수정을 완료했습니다.")
                 .build();
 
-        return new ResponseEntity<>(body, HttpStatus.OK);
+        return ResponseEntity.ok(body);
     }
 
     @Builder

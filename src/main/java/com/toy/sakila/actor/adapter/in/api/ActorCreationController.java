@@ -36,7 +36,7 @@ public class ActorCreationController {
                 .message("Actor 생성을 완료했습니다.")
                 .build();
 
-        return new ResponseEntity<>(body, HttpStatus.OK);
+        return ResponseEntity.ok(body);
     }
 
     @Builder
