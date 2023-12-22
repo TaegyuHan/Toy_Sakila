@@ -30,9 +30,6 @@ public class RentalJpaEntity extends BaseEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime returnDate;
 
-    @Column(name = "staff_id", nullable = false)
-    private Byte staffId;
-
     @ManyToOne
     @JoinColumn(name = "staff_id", referencedColumnName = "staff_id", insertable = false, updatable = false)
     private StaffJpaEntity staff;

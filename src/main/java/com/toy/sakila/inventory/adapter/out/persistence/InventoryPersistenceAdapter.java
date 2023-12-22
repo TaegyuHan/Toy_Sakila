@@ -12,7 +12,7 @@ import java.util.Optional;
 @PersistenceAdapter
 public class InventoryPersistenceAdapter implements InventorySavePort, InventoryReadPort {
 
-    private final InventorySpringDataJpaRepository inventorySpringDataJpaRepository;
+    private final InventorySpringDataRepository inventorySpringDataJpaRepository;
     private final InventoryPersistenceMapper mapper;
 
     @Override
