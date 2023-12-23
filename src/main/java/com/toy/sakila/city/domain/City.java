@@ -14,11 +14,11 @@ public class City {
     private String city;
     private Country country;
     private LocalDateTime lastUpdate;
-    private LocalDateTime createdDate;
+    private LocalDateTime createDate;
 
     @Value
     @AllArgsConstructor(staticName = "of")
     public static class CityId {
-        Long value;
+        Short value;
     }
 }

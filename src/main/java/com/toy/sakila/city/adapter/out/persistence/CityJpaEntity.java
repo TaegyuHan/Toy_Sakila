@@ -11,13 +11,15 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "city")
+@Table(
+        name = "city"
+)
 public class CityJpaEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "city_id")
-    private Long cityId;
+    private Short cityId;
 
     @Column(name = "city", nullable = false, length = 50)
     private String city;

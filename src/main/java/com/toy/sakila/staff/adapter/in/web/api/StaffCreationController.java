@@ -55,7 +55,7 @@ public class StaffCreationController {
             String username,
             String password,
             LocalDateTime lastUpdate,
-            LocalDateTime createdDate
+            LocalDateTime createDate
     ){
         private static OutputDTO of(Staff domain) {
             return OutputDTO.builder()
@@ -70,7 +70,7 @@ public class StaffCreationController {
                     .username(domain.getUsername())
                     .password(domain.getPassword())
                     .lastUpdate(domain.getLastUpdate())
-                    .createdDate(domain.getCreatedDate())
+                    .createDate(domain.getCreateDate())
                     .build();
         }
     }

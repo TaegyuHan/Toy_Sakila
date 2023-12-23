@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-interface SpringDataCategoryRepository extends JpaRepository<CategoryJpaEntity, Long> {
-    List<CategoryJpaEntity> findByIdIn(List<Long> ids);
+interface SpringDataCategoryRepository extends JpaRepository<CategoryJpaEntity, Byte> {
+    List<CategoryJpaEntity> findByCategoryIdIn(List<Byte> ids);
 }

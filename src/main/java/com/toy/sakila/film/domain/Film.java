@@ -45,6 +45,6 @@ public class Film {
     @Value
     @AllArgsConstructor(staticName = "of")
     public static class FilmId {
-        Long value;
+        Short value;
     }
 }

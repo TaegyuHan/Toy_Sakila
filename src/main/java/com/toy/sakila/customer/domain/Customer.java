@@ -19,7 +19,7 @@ public class Customer {
         private String email;
         private Address address;
         private boolean active;
-        private LocalDateTime createdDate;
+        private LocalDateTime createDate;
         private LocalDateTime lastUpdate;
 
         @Value

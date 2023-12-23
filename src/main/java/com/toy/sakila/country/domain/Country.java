@@ -14,6 +14,6 @@ public class Country {
     @Value
     @AllArgsConstructor(staticName = "of")
     public static class CountryId {
-        Integer value;
+        Short value;
     }
 }

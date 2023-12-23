@@ -46,7 +46,7 @@ public class FilmCreationController {
 
     @Builder
     private record OutputDTO(
-            Long id,
+            Short id,
             String title,
             String description,
             Short releaseYear,

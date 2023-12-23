@@ -19,7 +19,7 @@ public class Address {
     private String postalCode;
     private String phone;
     private LocalDateTime lastUpdate;
-    private LocalDateTime createdDate;
+    private LocalDateTime createDate;
 
     @Value
     @AllArgsConstructor(staticName = "of")

@@ -15,7 +15,7 @@ public class CategoryJpaEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id", nullable = false)
-    private Long id;
+    private Byte categoryId;
 
     @Column(name = "name", nullable = false, length = 25)
     private String name;

@@ -50,11 +50,11 @@ class ActorCreationControllerTest {
                 .build();
 
         Actor domain = Actor.builder()
-                .id(Actor.ActorId.of(1L))
+                .id(Actor.ActorId.of((short) 1L))
                 .firstName("NICK")
                 .lastName("WAHLBERG")
                 .lastUpdate(LocalDateTime.of(2023, 1, 1, 1, 1, 1))
-                .createdDate(LocalDateTime.of(2023, 1, 1, 1, 1, 1))
+                .createDate(LocalDateTime.of(2023, 1, 1, 1, 1, 1))
                 .build();
 
         given(actorCreationUseCase.create(command))
@@ -74,7 +74,7 @@ class ActorCreationControllerTest {
                                     "firstName": "NICK",
                                     "lastName": "WAHLBERG",
                                     "lastUpdate": "2023-01-01T01:01:01",
-                                    "createdDate": "2023-01-01T01:01:01"
+                                    "createDate": "2023-01-01T01:01:01"
                                   },
                                   "message": "Actor 생성을 완료했습니다.",
                                   "status": 200

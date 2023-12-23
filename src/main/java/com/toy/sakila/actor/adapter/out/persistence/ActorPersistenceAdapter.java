@@ -25,7 +25,7 @@ public class ActorPersistenceAdapter
     public List<Actor> findByIdIn(List<Actor.ActorId> ids) {
         return Optional.of(ids)
                         .map(mapper::mapToJpaEntityIds)
-                        .map(springDataActorRepository::findByIdIn)
+                        .map(springDataActorRepository::findByActorIdIn)
                         .map(mapper::mapToDomainEntities)
                         .orElseThrow();
     }

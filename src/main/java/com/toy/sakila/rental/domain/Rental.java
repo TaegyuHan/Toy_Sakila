@@ -21,7 +21,7 @@ public class Rental {
     private Inventory inventory;
     private Customer customer;
     private LocalDateTime lastUpdate;
-    private LocalDateTime createdDate;
+    private LocalDateTime createDate;
 
     @Value
     @AllArgsConstructor(staticName = "of")

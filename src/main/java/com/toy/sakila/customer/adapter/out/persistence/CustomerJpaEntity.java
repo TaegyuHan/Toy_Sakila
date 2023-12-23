@@ -36,6 +36,7 @@ public class CustomerJpaEntity extends BaseEntity {
     @Column(name = "address_id", nullable = false)
     private Short addressId;
 
+    @Builder.Default
     @Column(name = "active", nullable = false)
     private boolean active = true;
 

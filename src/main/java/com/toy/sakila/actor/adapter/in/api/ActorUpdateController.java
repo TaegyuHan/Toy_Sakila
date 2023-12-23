@@ -24,7 +24,7 @@ public class ActorUpdateController {
 
     @PostMapping("/{id}")
     public ResponseEntity<ResponseBody<Object>> actorUpdate(
-            @Validated @PathVariable Long id,
+            @Validated @PathVariable Short id,
             @Validated @RequestBody ActorUpdateCommand command
     ) {
         Actor domain = actorUpdateUseCase.update(Actor.ActorId.of(id), command);
@@ -40,11 +40,11 @@ public class ActorUpdateController {
 
     @Builder
     private record OutputDTO(
-            Long id,
+            Short id,
             String firstName,
             String lastName,
             LocalDateTime lastUpdate,
-            LocalDateTime createdDate
+            LocalDateTime createDate
     ) {
         public static OutputDTO of(Actor domain) {
             return OutputDTO.builder()
@@ -52,7 +52,7 @@ public class ActorUpdateController {
                     .firstName(domain.getFirstName())
                     .lastName(domain.getLastName())
                     .lastUpdate(domain.getLastUpdate())
-                    .createdDate(domain.getCreatedDate())
+                    .createDate(domain.getCreateDate())
                     .build();
         }
     }

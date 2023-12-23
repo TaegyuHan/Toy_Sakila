@@ -20,7 +20,7 @@ public class StorePersistenceMapper {
                 .address(addressPersistenceMapper.mapToDomainEntity(entity.getAddress()))
                 .managerStaff(staffPersistenceMapper.mapToDomainEntity(entity.getManagerStaff()))
                 .lastUpdate(entity.getLastUpdate())
-                .createdDate(entity.getCreatedDate())
+                .createDate(entity.getCreateDate())
                 .build();
     }
 

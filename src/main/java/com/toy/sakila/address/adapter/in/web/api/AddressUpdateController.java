@@ -49,7 +49,7 @@ public class AddressUpdateController {
             String postalCode,
             String phone,
             LocalDateTime lastUpdate,
-            LocalDateTime createdDate
+            LocalDateTime createDate
     ) {
         public static OutputDTO of(Address domain) {
             return OutputDTO.builder()
@@ -61,7 +61,7 @@ public class AddressUpdateController {
                     .postalCode(domain.getPostalCode())
                     .phone(domain.getPhone())
                     .lastUpdate(domain.getLastUpdate())
-                    .createdDate(domain.getCreatedDate())
+                    .createDate(domain.getCreateDate())
                     .build();
         }
     }

@@ -22,7 +22,7 @@ public class CityUpdateController {
 
     @PostMapping("/{id}")
     public ResponseEntity<ResponseBody<Object>> countryUpdate(
-            @PathVariable Long id,
+            @PathVariable Short id,
             @RequestBody CityUpdateCommand command
     ) {
         City domain = countryUpdateUseCase.update(City.CityId.of(id), command);
@@ -38,18 +38,18 @@ public class CityUpdateController {
 
     @Builder
     private record OutputDTO(
-            Long id,
+            Short id,
             String city,
             Long countryId,
             LocalDateTime lastUpdate,
-            LocalDateTime createdDate
+            LocalDateTime createDate
     ) {
         public static OutputDTO of(City domain) {
             return OutputDTO.builder()
                     .id(domain.getCityId().getValue())
                     .city(domain.getCity())
                     .lastUpdate(domain.getLastUpdate())
-                    .createdDate(domain.getCreatedDate())
+                    .createDate(domain.getCreateDate())
                     .build();
         }
     }

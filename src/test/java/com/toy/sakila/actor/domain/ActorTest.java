@@ -26,6 +26,6 @@ class ActorTest {
         assertEquals("Test Actor", actor.getFirstName());
         assertEquals("Test Actor", actor.getLastName());
         assertEquals(LocalDateTime.of(2021, 8, 1, 0, 0, 0), actor.getLastUpdate());
-        assertEquals(LocalDateTime.of(2021, 8, 1, 0, 0, 0), actor.getCreatedDate());
+        assertEquals(LocalDateTime.of(2021, 8, 1, 0, 0, 0), actor.getCreateDate());
     }
 }

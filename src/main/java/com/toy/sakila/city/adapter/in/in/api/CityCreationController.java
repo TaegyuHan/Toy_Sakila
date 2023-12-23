@@ -40,18 +40,18 @@ public class CityCreationController {
 
     @Builder
     private record OutputDTO(
-            Long id,
+            Short id,
             String city,
             Long countryId,
             LocalDateTime lastUpdate,
-            LocalDateTime createdDate
+            LocalDateTime createDate
     ) {
         public static OutputDTO of(City domain) {
             return OutputDTO.builder()
                     .id(domain.getCityId().getValue())
                     .city(domain.getCity())
                     .lastUpdate(domain.getLastUpdate())
-                    .createdDate(domain.getCreatedDate())
+                    .createDate(domain.getCreateDate())
                     .build();
         }
     }

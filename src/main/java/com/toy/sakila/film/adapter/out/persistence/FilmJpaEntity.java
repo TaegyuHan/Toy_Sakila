@@ -24,7 +24,7 @@ public class FilmJpaEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "film_id")
-    private Long filmId;
+    private Short filmId;
 
     @Column(name = "title", length = 128, nullable = false)
     private String title;
@@ -40,8 +40,8 @@ public class FilmJpaEntity extends BaseEntity {
             name = "film_actor",
             joinColumns = @JoinColumn(name = "film_id"),
             inverseJoinColumns = @JoinColumn(name = "actor_id"),
-            foreignKey = @ForeignKey(name = "FK_film_actor_film_id"),
-            inverseForeignKey = @ForeignKey(name = "FK_film_actor_actor_id")
+            foreignKey = @ForeignKey(name = "fk_film_actor_film"),
+            inverseForeignKey = @ForeignKey(name = "fk_film_actor_actor")
     )
     private Set<ActorJpaEntity> actor;
 
@@ -50,8 +50,8 @@ public class FilmJpaEntity extends BaseEntity {
             name = "film_category",
             joinColumns = @JoinColumn(name = "film_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"),
-            foreignKey = @ForeignKey(name = "FK_film_category_film_id"),
-            inverseForeignKey = @ForeignKey(name = "FK_film_category_category_id")
+            foreignKey = @ForeignKey(name = "fk_film_category_film"),
+            inverseForeignKey = @ForeignKey(name = "fk_film_category_category")
     )
     private Set<CategoryJpaEntity> category;
 
@@ -86,12 +86,7 @@ public class FilmJpaEntity extends BaseEntity {
     @Column(name = "rating", columnDefinition = "ENUM('G','PG','PG-13','R','NC-17')")
     private EnumFilmRating rating = EnumFilmRating.G;
 
-    @ElementCollection(targetClass = EnumSpecialFeature.class)
-    @Column(name = "special_feature")
-    @CollectionTable(
-            name = "film_special_features",
-            joinColumns = @JoinColumn(name = "film_id"),
-            foreignKey = @ForeignKey(name = "FK_film_special_features_film_id")
-    )
+    @Convert(converter = SpecialFeaturesConverter.class)
+    @Column(name = "special_features")
     private Set<EnumSpecialFeature> specialFeatures;
 }

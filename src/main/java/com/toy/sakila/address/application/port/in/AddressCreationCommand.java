@@ -10,7 +10,7 @@ public class AddressCreationCommand {
     String address;
     String address2;
     String district;
-    Long cityId;
+    Short cityId;
     String postalCode;
     String phone;
 }

@@ -15,11 +15,11 @@ public class Actor {
     private String lastName;
     private String firstName;
     private LocalDateTime lastUpdate;
-    private LocalDateTime createdDate;
+    private LocalDateTime createDate;
 
     @Value
     @AllArgsConstructor(staticName = "of")
     public static class ActorId {
-        Long value;
+        Short value;
     }
 }

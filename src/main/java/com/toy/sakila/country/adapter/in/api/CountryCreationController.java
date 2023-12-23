@@ -5,7 +5,6 @@ import com.toy.sakila.common.adapter.in.web.ResponseBody;
 import com.toy.sakila.country.application.port.in.CountryCreationCommand;
 import com.toy.sakila.country.application.port.in.CountryCreationUseCase;
 import com.toy.sakila.country.domain.Country;
-import com.toy.sakila.film.adapter.in.in.api.FilmCreationController;
 import lombok.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,6 +45,6 @@ public class CountryCreationController {
     @Setter
     @Builder
     public static class OutputDTO {
-        Integer id;
+        Short id;
     }
 }

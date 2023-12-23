@@ -23,7 +23,7 @@ public class Staff {
     private String username;
     private String password;
     private LocalDateTime lastUpdate;
-    private LocalDateTime createdDate;
+    private LocalDateTime createDate;
     @Value
     @AllArgsConstructor(staticName = "of")
     public static class StaffId {

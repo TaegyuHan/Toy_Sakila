@@ -20,7 +20,7 @@ class ActorPersistenceMapperTest {
     @Test
     void mapToDomainEntityIds() {
         // given
-        List<Long> ids = List.of(1L, 2L, 3L);
+        List<Short> ids = List.of((short) 1, (short) 2, (short) 3);
 
         // when
         List<Actor.ActorId> actorIds = mapper.mapToDomainEntityIds(ids);
@@ -28,9 +28,9 @@ class ActorPersistenceMapperTest {
         // then
         assertArrayEquals(
                 List.of(
-                        Actor.ActorId.of(1L),
-                        Actor.ActorId.of(2L),
-                        Actor.ActorId.of(3L)
+                        Actor.ActorId.of((short)1),
+                        Actor.ActorId.of((short)2),
+                        Actor.ActorId.of((short)3)
                 ).toArray(),
                 actorIds.toArray()
         );
@@ -40,17 +40,17 @@ class ActorPersistenceMapperTest {
     void mapToJpaEntityIds() {
         // given
         List<Actor.ActorId> actorIds = List.of(
-                Actor.ActorId.of(1L),
-                Actor.ActorId.of(2L),
-                Actor.ActorId.of(3L)
+                Actor.ActorId.of((short)1),
+                Actor.ActorId.of((short)2),
+                Actor.ActorId.of((short)3)
         );
 
         // when
-        List<Long> ids = mapper.mapToJpaEntityIds(actorIds);
+        List<Short> ids = mapper.mapToJpaEntityIds(actorIds);
 
         // then
         assertArrayEquals(
-                List.of(1L, 2L, 3L).toArray(),
+                List.of(1, 2, 3).toArray(),
                 ids.toArray()
         );
     }

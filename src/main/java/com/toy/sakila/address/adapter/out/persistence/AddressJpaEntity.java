@@ -2,6 +2,7 @@ package com.toy.sakila.address.adapter.out.persistence;
 
 
 import com.toy.sakila.city.adapter.out.persistence.CityJpaEntity;
+import com.toy.sakila.common.adapter.out.persistence.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +13,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "address")
-public class AddressJpaEntity {
+public class AddressJpaEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

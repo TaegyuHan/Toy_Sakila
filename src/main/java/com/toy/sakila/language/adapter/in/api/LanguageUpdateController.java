@@ -24,7 +24,7 @@ public class LanguageUpdateController {
 
     @PostMapping("/{id}")
     public ResponseEntity<ResponseBody<Object>> languageUpdate(
-            @PathVariable Long id,
+            @PathVariable Byte id,
             @RequestBody LanguageUpdateCommand command
     ) {
         Language domain = languageUpdateUseCase.update(Language.LanguageId.of(id), command);
@@ -40,17 +40,17 @@ public class LanguageUpdateController {
 
     @Builder
     private record OutputDTO(
-            Long id,
+            Byte id,
             String name,
             LocalDateTime lastUpdate,
-            LocalDateTime createdDate
+            LocalDateTime createDate
     ) {
         public static OutputDTO of(Language domain) {
             return OutputDTO.builder()
                     .id(domain.getId().getValue())
                     .name(domain.getName())
                     .lastUpdate(domain.getLastUpdate())
-                    .createdDate(domain.getCreatedDate())
+                    .createDate(domain.getCreateDate())
                     .build();
         }
     }

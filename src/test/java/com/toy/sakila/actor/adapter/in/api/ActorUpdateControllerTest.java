@@ -50,14 +50,14 @@ class ActorUpdateControllerTest {
                 .build();
 
         Actor domain = Actor.builder()
-                .id(Actor.ActorId.of(1L))
+                .id(Actor.ActorId.of((short) 1L))
                 .firstName("NICK")
                 .lastName("UPDATED")
                 .lastUpdate(LocalDateTime.of(2023, 1, 1, 1, 1, 1))
-                .createdDate(LocalDateTime.of(2023, 1, 1, 1, 1, 1))
+                .createDate(LocalDateTime.of(2023, 1, 1, 1, 1, 1))
                 .build();
 
-        given(actorUpdateUseCase.update(Actor.ActorId.of(1L), command))
+        given(actorUpdateUseCase.update(Actor.ActorId.of((short) 1L), command))
                 .willReturn(domain);
 
         // when
@@ -74,7 +74,7 @@ class ActorUpdateControllerTest {
                                     "firstName": "NICK",
                                     "lastName": "UPDATED",
                                     "lastUpdate": "2023-01-01T01:01:01",
-                                    "createdDate": "2023-01-01T01:01:01"
+                                    "createDate": "2023-01-01T01:01:01"
                                   },
                                   "message": "Actor 수정을 완료했습니다.",
                                   "status": 200
@@ -85,7 +85,7 @@ class ActorUpdateControllerTest {
 
         // then
         verify(actorUpdateUseCase, times(1))
-                .update(eq(Actor.ActorId.of(1L)), commandCaptor.capture());
+                .update(eq(Actor.ActorId.of((short) 1L)), commandCaptor.capture());
         assertThat(commandCaptor.getValue()).isEqualTo(command);
     }
 }
