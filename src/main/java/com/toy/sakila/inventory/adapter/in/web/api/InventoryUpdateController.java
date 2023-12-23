@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @WebAdapter
 @RestController
-@RequestMapping("/api/v1/staff")
+@RequestMapping("/api/v1/inventory")
 public class InventoryUpdateController {
 
     private final InventoryUpdateUseCase staffUpdateUseCase;

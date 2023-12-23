@@ -53,7 +53,7 @@ public class AddressCreationController {
     ) {
         public static OutputDTO of(Address domain) {
             return OutputDTO.builder()
-                    .id(domain.getAddressId().getValue())
+                    .id(domain.getId().getValue())
                     .address(domain.getAddress())
                     .address2(domain.getAddress2())
                     .district(domain.getDistrict())
