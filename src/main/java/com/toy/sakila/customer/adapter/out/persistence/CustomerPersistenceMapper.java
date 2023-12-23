@@ -25,7 +25,7 @@ public class CustomerPersistenceMapper {
                 .email(entity.getEmail())
                 .active(entity.isActive())
                 .lastUpdate(entity.getLastUpdate())
-                .createdDate(entity.getCreatedDate())
+                .createDate(entity.getCreateDate())
                 .build();
     }
 }

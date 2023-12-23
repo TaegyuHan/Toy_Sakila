@@ -11,11 +11,11 @@ public class Language {
     private final LanguageId id;
     private String name;
     private LocalDateTime lastUpdate;
-    private LocalDateTime createdDate;
+    private LocalDateTime createDate;
 
     @Value
     @AllArgsConstructor(staticName = "of")
     public static class LanguageId {
-        Long value;
+        Byte value;
     }
 }

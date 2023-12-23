@@ -22,7 +22,7 @@ public class CountryUpdateController {
 
     @PostMapping("/{id}")
     public ResponseEntity<ResponseBody<Object>> countryUpdate(
-            @PathVariable Integer id,
+            @PathVariable Short id,
             @RequestBody CountryUpdateCommand command
     ) {
         Country domain = countryUpdateUseCase.update(Country.CountryId.of(id), command);
@@ -47,7 +47,7 @@ public class CountryUpdateController {
     @Setter
     @Builder
     public static class OutputDTO {
-        Integer id;
+        Short id;
         String name;
         LocalDateTime lastUpdate;
     }

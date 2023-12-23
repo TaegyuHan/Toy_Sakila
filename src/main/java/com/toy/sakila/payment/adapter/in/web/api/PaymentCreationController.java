@@ -53,7 +53,7 @@ public class PaymentCreationController {
             BigDecimal amount,
             LocalDateTime paymentDate,
             LocalDateTime lastUpdate,
-            LocalDateTime createdDate
+            LocalDateTime createDate
     ){
         private static OutputDTO of(Payment domain) {
             return OutputDTO.builder()
@@ -64,7 +64,7 @@ public class PaymentCreationController {
                     .amount(domain.getAmount())
                     .paymentDate(domain.getPaymentDate())
                     .lastUpdate(domain.getLastUpdate())
-                    .createdDate(domain.getCreatedDate())
+                    .createDate(domain.getCreateDate())
                     .build();
         }
     }

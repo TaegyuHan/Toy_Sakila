@@ -14,7 +14,7 @@ class ActorTest {
     public void testActorDomainCreation() {
         // when
         Actor actor = Actor.builder()
-                .id(Actor.ActorId.of(1L))
+                .id(Actor.ActorId.of((short) 1L))
                 .firstName("Test Actor")
                 .lastName("Test Actor")
                 .lastUpdate(LocalDateTime.of(2021, 8, 1, 0, 0, 0))
@@ -26,6 +26,6 @@ class ActorTest {
         assertEquals("Test Actor", actor.getFirstName());
         assertEquals("Test Actor", actor.getLastName());
         assertEquals(LocalDateTime.of(2021, 8, 1, 0, 0, 0), actor.getLastUpdate());
-        assertEquals(LocalDateTime.of(2021, 8, 1, 0, 0, 0), actor.getCreatedDate());
+        assertEquals(LocalDateTime.of(2021, 8, 1, 0, 0, 0), actor.getCreateDate());
     }
 }

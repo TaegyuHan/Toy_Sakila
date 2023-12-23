@@ -17,7 +17,7 @@ public class StaffPersistenceMapper {
                 .password(entity.getPassword())
                 .active(entity.isActive())
                 .lastUpdate(entity.getLastUpdate())
-                .createdDate(entity.getCreatedDate())
+                .createDate(entity.getCreateDate())
                 .build();
     }
 

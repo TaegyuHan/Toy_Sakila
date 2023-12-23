@@ -45,14 +45,14 @@ public class StoreCreationController {
             Byte id,
             Staff managerStaff,
             LocalDateTime updateDate,
-            LocalDateTime createdDate
+            LocalDateTime createDate
     ){
         public static OutputDTO of(Store domain){
             return OutputDTO.builder()
                     .id(domain.getId().getValue())
                     .managerStaff(domain.getManagerStaff())
                     .updateDate(domain.getLastUpdate())
-                    .createdDate(domain.getCreatedDate())
+                    .createDate(domain.getCreateDate())
                     .build();
         }
     }

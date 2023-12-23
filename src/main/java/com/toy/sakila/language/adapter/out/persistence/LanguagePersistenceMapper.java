@@ -8,17 +8,17 @@ import com.toy.sakila.language.domain.Language;
 public class LanguagePersistenceMapper {
     public LanguageJpaEntity mapToJpaEntity(Language category) {
         return LanguageJpaEntity.builder()
-                .id(category.getId().getValue())
+                .languageId(category.getId().getValue())
                 .name(category.getName())
                 .build();
     }
 
     public Language mapToDomainEntity(LanguageJpaEntity entity) {
         return Language.builder()
-                .id(Language.LanguageId.of(entity.getId()))
+                .id(Language.LanguageId.of(entity.getLanguageId()))
                 .name(entity.getName())
                 .lastUpdate(entity.getLastUpdate())
-                .createdDate(entity.getCreatedDate())
+                .createDate(entity.getCreateDate())
                 .build();
     }
 }

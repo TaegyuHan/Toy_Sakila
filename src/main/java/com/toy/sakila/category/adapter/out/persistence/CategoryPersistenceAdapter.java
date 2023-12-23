@@ -26,7 +26,7 @@ class CategoryPersistenceAdapter
     public List<Category> findByIdIn(List<Category.CategoryId> ids) {
         return Optional.of(ids)
                 .map(mapper::mapToJpaEntityIds)
-                .map(springDataRepository::findByIdIn)
+                .map(springDataRepository::findByCategoryIdIn)
                 .map(mapper::mapToDomainEntities)
                 .orElseThrow();
     }

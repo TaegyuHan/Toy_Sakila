@@ -45,7 +45,7 @@ public class InventoryUpdateController {
             Film film,
             Store store,
             LocalDateTime lastUpdate,
-            LocalDateTime createdDate
+            LocalDateTime createDate
     ){
         private static OutputDTO of(Inventory domain) {
             return OutputDTO.builder()
@@ -53,7 +53,7 @@ public class InventoryUpdateController {
                     .film(domain.getFilm())
                     .store(domain.getStore())
                     .lastUpdate(domain.getLastUpdate())
-                    .createdDate(domain.getCreatedDate())
+                    .createDate(domain.getCreateDate())
                     .build();
         }
     }

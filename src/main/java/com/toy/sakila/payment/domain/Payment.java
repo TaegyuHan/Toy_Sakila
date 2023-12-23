@@ -20,7 +20,7 @@ public class Payment {
     private BigDecimal amount;
     private LocalDateTime paymentDate;
     private LocalDateTime lastUpdate;
-    private LocalDateTime createdDate;
+    private LocalDateTime createDate;
 
     @Value
     @AllArgsConstructor(staticName = "of")

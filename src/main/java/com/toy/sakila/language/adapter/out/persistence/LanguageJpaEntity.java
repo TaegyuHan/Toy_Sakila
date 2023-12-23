@@ -16,7 +16,7 @@ public class LanguageJpaEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "language_id", nullable = false)
-    private Long id;
+    private Byte languageId;
 
     @Column(name = "name", nullable = false, length = 25)
     private String name;

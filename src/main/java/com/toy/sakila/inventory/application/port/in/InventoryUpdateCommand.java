@@ -10,6 +10,6 @@ import lombok.Value;
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
 public class InventoryUpdateCommand {
-    Long filmId;
+    Short filmId;
     Byte storeId;
 }

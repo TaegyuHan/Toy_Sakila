@@ -22,7 +22,7 @@ public class CategoryUpdateController {
 
     @PostMapping("/{id}")
     public ResponseEntity<ResponseBody<Object>> categoryUpdate(
-            @PathVariable Long id,
+            @PathVariable Byte id,
             @RequestBody CategoryUpdateCommand command
     ) {
         Category domain = categoryUpdateUseCase.update(Category.CategoryId.of(id), command);
@@ -38,10 +38,10 @@ public class CategoryUpdateController {
 
     @Builder
     private record OutputDTO(
-            Long id,
+            Byte id,
             String name,
             LocalDateTime lastUpdate,
-            LocalDateTime createdDate
+            LocalDateTime createDate
     ) {
         public static OutputDTO of(Category domain) {
             return OutputDTO.builder()

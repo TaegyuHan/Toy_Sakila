@@ -9,5 +9,5 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = false)
 public class CityCreationCommand {
     String city;
-    Integer countryId;
+    Short countryId;
 }

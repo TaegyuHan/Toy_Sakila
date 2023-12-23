@@ -41,11 +41,11 @@ public class ActorCreationController {
 
     @Builder
     private record OutputDTO(
-            Long id,
+            Short id,
             String lastName,
             String firstName,
             LocalDateTime lastUpdate,
-            LocalDateTime createdDate
+            LocalDateTime createDate
     ) {
             public static OutputDTO of(Actor domain) {
                 return OutputDTO.builder()
@@ -53,7 +53,7 @@ public class ActorCreationController {
                         .firstName(domain.getFirstName())
                         .lastName(domain.getLastName())
                         .lastUpdate(domain.getLastUpdate())
-                        .createdDate(domain.getCreatedDate())
+                        .createDate(domain.getCreateDate())
                         .build();
             }
         }

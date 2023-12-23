@@ -42,17 +42,17 @@ public class LanguageCreationController {
 
     @Builder
     private record OutputDTO(
-            Long id,
+            Byte id,
             String name,
             LocalDateTime lastUpdate,
-            LocalDateTime createdDate
+            LocalDateTime createDate
     ) {
         public static OutputDTO of(Language domain) {
             return OutputDTO.builder()
                     .id(domain.getId().getValue())
                     .name(domain.getName())
                     .lastUpdate(domain.getLastUpdate())
-                    .createdDate(domain.getCreatedDate())
+                    .createDate(domain.getCreateDate())
                     .build();
         }
     }

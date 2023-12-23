@@ -9,13 +9,13 @@ import java.util.List;
 @Mapper
 public class ActorPersistenceMapper {
 
-    public List<Actor.ActorId> mapToDomainEntityIds(List<Long> ids) {
+    public List<Actor.ActorId> mapToDomainEntityIds(List<Short> ids) {
         return ids.stream()
                 .map(Actor.ActorId::of)
                 .toList();
     }
 
-    public List<Long> mapToJpaEntityIds(List<Actor.ActorId> ids) {
+    public List<Short> mapToJpaEntityIds(List<Actor.ActorId> ids) {
         return ids.stream()
                 .map(Actor.ActorId::getValue)
                 .toList();
@@ -35,7 +35,7 @@ public class ActorPersistenceMapper {
 
     public ActorJpaEntity mapToJpaEntity(Actor actor) {
         return ActorJpaEntity.builder()
-                .id(actor.getId().getValue())
+                .actorId(actor.getId().getValue())
                 .firstName(actor.getFirstName())
                 .lastName(actor.getLastName())
                 .build();
@@ -43,11 +43,11 @@ public class ActorPersistenceMapper {
 
     public Actor mapToDomainEntity(ActorJpaEntity entity) {
         return Actor.builder()
-                .id(Actor.ActorId.of(entity.getId()))
+                .id(Actor.ActorId.of(entity.getActorId()))
                 .firstName(entity.getFirstName())
                 .lastName(entity.getLastName())
                 .lastUpdate(entity.getLastUpdate())
-                .createdDate(entity.getCreatedDate())
+                .createDate(entity.getCreateDate())
                 .build();
     }
 }

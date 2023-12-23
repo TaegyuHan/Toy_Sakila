@@ -40,10 +40,10 @@ public class CategoryCreationController {
 
     @Builder
     private record OutputDTO(
-            Long id,
+            Byte id,
             String name,
             LocalDateTime lastUpdate,
-            LocalDateTime createdDate
+            LocalDateTime createDate
     ) {
         public static OutputDTO of(Category domain) {
             return OutputDTO.builder()

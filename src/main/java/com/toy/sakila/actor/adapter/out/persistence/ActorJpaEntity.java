@@ -12,12 +12,16 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "actor")
+@Table(
+        name = "actor",
+        indexes = {
+                @Index(name = "idx_actor_last_name", columnList = "last_name")
+        })
 public class ActorJpaEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Short actorId;
 
     @Column(name = "first_name", nullable = false, length = 45)
     private String firstName;

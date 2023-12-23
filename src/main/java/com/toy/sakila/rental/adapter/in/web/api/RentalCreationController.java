@@ -52,7 +52,7 @@ public class RentalCreationController {
             Inventory inventory,
             Customer customer,
             LocalDateTime lastUpdate,
-            LocalDateTime createdDate
+            LocalDateTime createDate
     ){
         private static OutputDTO of(Rental domain) {
             return OutputDTO.builder()
@@ -63,7 +63,7 @@ public class RentalCreationController {
                     .inventory(domain.getInventory())
                     .customer(domain.getCustomer())
                     .lastUpdate(domain.getLastUpdate())
-                    .createdDate(domain.getCreatedDate())
+                    .createDate(domain.getCreateDate())
                     .build();
         }
     }

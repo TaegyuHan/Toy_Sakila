@@ -45,7 +45,7 @@ public class CustomerUpdateController {
             String email,
             Short addressId,
             boolean active,
-            LocalDateTime createdDate,
+            LocalDateTime createDate,
             LocalDateTime updateDate
     ){
         public static OutputDTO of(Customer domain){
@@ -56,7 +56,7 @@ public class CustomerUpdateController {
                     .email(domain.getEmail())
                     .addressId(domain.getAddress().getId().getValue())
                     .active(domain.isActive())
-                    .createdDate(domain.getCreatedDate())
+                    .createDate(domain.getCreateDate())
                     .updateDate(domain.getLastUpdate())
                     .build();
         }

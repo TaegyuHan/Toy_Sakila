@@ -15,7 +15,7 @@ public class Store {
     private Staff managerStaff;
     private Address address;
     private LocalDateTime lastUpdate;
-    private LocalDateTime createdDate;
+    private LocalDateTime createDate;
 
     @Value
     @AllArgsConstructor(staticName = "of")

@@ -17,6 +17,6 @@ public class Category {
     @Value
     @AllArgsConstructor(staticName = "of")
     public static class CategoryId {
-        Long value;
+        Byte value;
     }
 }

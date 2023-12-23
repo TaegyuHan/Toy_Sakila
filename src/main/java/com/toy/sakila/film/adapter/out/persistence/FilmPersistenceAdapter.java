@@ -14,7 +14,7 @@ import java.util.Optional;
 public class FilmPersistenceAdapter
         implements FilmCreationPort, FilmReadPort {
 
-    private final FilmRepository SpringDataFilmRepository;
+    private final SpringDataFilmRepository SpringDataFilmRepository;
     private final FilmPersistenceMapper mapper;
 
     @Override
