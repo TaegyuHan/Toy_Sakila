@@ -140,8 +140,6 @@ class ActorPersistenceAdapterTest {
                 .id(Actor.ActorId.of((short) 1))
                 .firstName("Test Actor")
                 .lastName("Test Actor")
-                .lastUpdate(LocalDateTime.of(2023, 1, 1, 1, 1, 1))
-                .createDate(LocalDateTime.of(2023, 1, 1, 1, 1, 1))
                 .build();
 
         given(mapper.mapToJpaEntity(any(Actor.class)))
@@ -151,8 +149,8 @@ class ActorPersistenceAdapterTest {
                         .lastName("Test Actor")
                         .build());
 
-        given(springDataRepository.save(any(ActorJpaEntity.class))).willReturn(
-                ActorJpaEntity.builder()
+        given(springDataRepository.save(any(ActorJpaEntity.class)))
+                .willReturn(ActorJpaEntity.builder()
                         .actorId((short) 1)
                         .firstName("Test Actor")
                         .lastName("Test Actor")
@@ -169,14 +167,34 @@ class ActorPersistenceAdapterTest {
                         .build());
 
         // when
-        Actor result = actorPersistenceAdapter.save(actor);
+        Actor actual = actorPersistenceAdapter.save(actor);
 
         // then
-        assertThat(result).isNotNull();
-        assertThat(result.getId()).isEqualTo(Actor.ActorId.of((short) 1L));
-        assertThat(result.getFirstName()).isEqualTo("Test Actor");
-        assertThat(result.getLastName()).isEqualTo("Test Actor");
-        assertThat(result.getLastUpdate()).isEqualTo(LocalDateTime.of(2023, 1, 1, 1, 1, 1));
-        assertThat(result.getCreateDate()).isEqualTo(LocalDateTime.of(2023, 1, 1, 1, 1, 1));
+        assertThat(actual).isNotNull();
+        assertThat(actual.getId()).isEqualTo(Actor.ActorId.of((short) 1));
+        assertThat(actual.getFirstName()).isEqualTo("Test Actor");
+        assertThat(actual.getLastName()).isEqualTo("Test Actor");
+        assertThat(actual.getLastUpdate()).isEqualTo(LocalDateTime.of(2023, 1, 1, 1, 1, 1));
+        assertThat(actual.getCreateDate()).isEqualTo(LocalDateTime.of(2023, 1, 1, 1, 1, 1));
+    }
+
+    @Test
+    void testFindByIdIn() {
+    }
+
+    @Test
+    void testFindById() {
+    }
+
+    @Test
+    void findAll() {
+    }
+
+    @Test
+    void testSave() {
+    }
+
+    @Test
+    void delete() {
     }
 }

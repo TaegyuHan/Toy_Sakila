@@ -18,16 +18,18 @@ class ActorJpaEntityTest {
     @Test
     @DisplayName("성공 | JPA Entity | Actor | 생성")
     public void testActorJpaEntityPersistence() {
-        // when
-        ActorJpaEntity category = ActorJpaEntity.builder()
+        // given
+        ActorJpaEntity expected = ActorJpaEntity.builder()
                 .firstName("Test Actor")
                 .lastName("Test Actor")
                 .build();
-        category = entityManager.persistFlushFind(category);
+
+        // when
+        ActorJpaEntity actual = entityManager.persistFlushFind(expected);
 
         // then
-        assertNotNull(category.getId());
-        assertEquals("Test Actor", category.getFirstName());
-        assertEquals("Test Actor", category.getLastName());
+        assertNotNull(actual.getActorId());
+        assertEquals(expected.getFirstName(), actual.getFirstName());
+        assertEquals(expected.getLastName(), actual.getLastName());
     }
 }

@@ -9,4 +9,6 @@ public interface ActorReadPort {
     List<Actor> findByIdIn(List<Actor.ActorId> ids);
 
     Actor findById(Actor.ActorId id);
+
+    List<Actor> findAll();
 }

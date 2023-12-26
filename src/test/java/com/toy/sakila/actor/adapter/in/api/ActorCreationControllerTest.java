@@ -1,7 +1,7 @@
 package com.toy.sakila.actor.adapter.in.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.toy.sakila.actor.application.port.in.ActorCreationCommand;
+import com.toy.sakila.actor.application.port.in.ActorCommand;
 import com.toy.sakila.actor.application.port.in.ActorCreationUseCase;
 import com.toy.sakila.actor.domain.Actor;
 import com.toy.sakila.utils.JsonComparator;
@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 
+import static com.toy.sakila.config.Version.API_PREFIX;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
@@ -38,13 +39,13 @@ class ActorCreationControllerTest {
     private ActorCreationUseCase actorCreationUseCase;
 
     @Captor
-    private ArgumentCaptor<ActorCreationCommand> commandCaptor;
+    private ArgumentCaptor<ActorCommand> commandCaptor;
 
     @Test
-    @DisplayName("성공 | REST API | POST | Actor | 생성")
+    @DisplayName("REST API | POST | Actor | 생성")
     void actorCreation() throws Exception {
         // given
-        ActorCreationCommand command = ActorCreationCommand.builder()
+        ActorCommand command = ActorCommand.builder()
                 .firstName("NICK")
                 .lastName("WAHLBERG")
                 .build();
@@ -61,7 +62,7 @@ class ActorCreationControllerTest {
                 .willReturn(domain);
 
         // when
-        mockMvc.perform(post("/film/actor")
+        mockMvc.perform(post(API_PREFIX + "/film/actor")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(command)))
                 .andExpect(status().isOk())

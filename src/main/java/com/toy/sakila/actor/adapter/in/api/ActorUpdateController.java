@@ -1,31 +1,36 @@
 package com.toy.sakila.actor.adapter.in.api;
 
+
 import com.toy.sakila.actor.application.port.in.ActorUpdateUseCase;
-import com.toy.sakila.actor.application.port.in.ActorUpdateCommand;
+import com.toy.sakila.actor.application.port.in.ActorCommand;
 import com.toy.sakila.actor.domain.Actor;
 import com.toy.sakila.common.WebAdapter;
 import com.toy.sakila.common.adapter.in.web.ResponseBody;
+import jakarta.validation.Valid;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.time.LocalDateTime;
+
+
+import static com.toy.sakila.config.Version.API_PREFIX;
 
 
 @RequiredArgsConstructor
 @WebAdapter
 @RestController
-@RequestMapping("/film/actor")
+@RequestMapping(API_PREFIX + "/film/actor")
 public class ActorUpdateController {
 
     private final ActorUpdateUseCase actorUpdateUseCase;
 
     @PostMapping("/{id}")
     public ResponseEntity<ResponseBody<Object>> actorUpdate(
-            @Validated @PathVariable Short id,
-            @Validated @RequestBody ActorUpdateCommand command
+            @PathVariable Short id,
+            @Valid @RequestBody ActorCommand command
     ) {
         Actor domain = actorUpdateUseCase.update(Actor.ActorId.of(id), command);
 

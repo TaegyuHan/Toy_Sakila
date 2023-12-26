@@ -4,5 +4,5 @@ import com.toy.sakila.actor.domain.Actor;
 
 
 public interface ActorUpdateUseCase {
-    Actor update(Actor.ActorId id, ActorUpdateCommand command);
+    Actor update(Actor.ActorId id, ActorCommand command);
 }

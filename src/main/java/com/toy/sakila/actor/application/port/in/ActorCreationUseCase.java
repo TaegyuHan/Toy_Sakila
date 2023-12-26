@@ -6,5 +6,5 @@ import com.toy.sakila.common.UseCase;
 
 @UseCase
 public interface ActorCreationUseCase {
-    Actor create(ActorCreationCommand command);
+    Actor create(ActorCommand command);
 }

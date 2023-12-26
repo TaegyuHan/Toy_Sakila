@@ -16,7 +16,7 @@ import lombok.*;
         name = "actor",
         indexes = {
                 @Index(name = "idx_actor_last_name", columnList = "last_name")
-        })
+})
 public class ActorJpaEntity extends BaseEntity {
 
     @Id

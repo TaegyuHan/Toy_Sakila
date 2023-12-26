@@ -1,5 +1,6 @@
 package com.toy.sakila.actor.adapter.out.persistence;
 
+import com.toy.sakila.actor.application.port.out.ActorDeletePort;
 import com.toy.sakila.actor.application.port.out.ActorReadPort;
 import com.toy.sakila.actor.application.port.out.ActorSavePort;
 import com.toy.sakila.actor.domain.Actor;
@@ -15,10 +16,10 @@ import java.util.Optional;
 @PersistenceAdapter
 @Transactional
 public class ActorPersistenceAdapter
-        implements ActorReadPort, ActorSavePort {
+        implements ActorReadPort, ActorSavePort, ActorDeletePort {
 
-    private final ActorPersistenceMapper mapper;
     private final SpringDataActorRepository springDataActorRepository;
+    private final ActorPersistenceMapper mapper;
 
     @Override
     @Transactional(readOnly = true)
@@ -31,10 +32,20 @@ public class ActorPersistenceAdapter
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Actor findById(Actor.ActorId id) {
         return springDataActorRepository.findById(id.getValue())
                 .map(mapper::mapToDomainEntity)
                 .orElseThrow();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Actor> findAll() {
+        return springDataActorRepository.findAll()
+                .stream()
+                .map(mapper::mapToDomainEntity)
+                .toList();
     }
 
     @Override
@@ -44,5 +55,10 @@ public class ActorPersistenceAdapter
                 .map(springDataActorRepository::save)
                 .map(mapper::mapToDomainEntity)
                 .orElseThrow();
+    }
+
+    @Override
+    public void delete(Actor.ActorId id) {
+        springDataActorRepository.deleteById(id.getValue());
     }
 }
